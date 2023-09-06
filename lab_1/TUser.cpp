@@ -2,14 +2,6 @@
 
 #include <format>
 
-unsigned int TUser::Id() const {
-    return 0;
-}
-
-void TUser::Id(unsigned int id) {
-	m_uId = id;
-}
-
 const std::string &TUser::Name() const {
     return m_sName;
 }

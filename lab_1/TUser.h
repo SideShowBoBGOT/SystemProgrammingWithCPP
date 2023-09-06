@@ -6,16 +6,15 @@
 #include <expected>
 
 #include "EGender.h"
+#include "TIdMixin.h"
 
-class TUser {
+
+class TUser : public TIdMixin {
 	public:
 	TUser()=default;
 	virtual ~TUser()=default;
 	
 	public:
-	virtual unsigned Id() const;
-    virtual void Id(unsigned id);
-
     virtual const std::string& Name() const;
     virtual void Name(const std::string& name);
 
@@ -38,8 +37,6 @@ class TUser {
     virtual void PassportData(const std::string& passportData);
     
     protected:
-    unsigned m_uId = 0;
-
     std::string m_sName;
     std::string m_sMiddleName;
     std::string m_sSurname;

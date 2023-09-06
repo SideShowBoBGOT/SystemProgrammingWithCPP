@@ -7,11 +7,12 @@
 #include <format>
 #include <algorithm>
 
+class TIdMixin;
 class TUser;
 class TWorker;
 
 template<typename T>
-concept UserDerivable = std::is_base_of_v<TUser, T>;
+concept CIdMixin = std::is_base_of_v<TIdMixin, T>;
 
 class TLibrary {
 	public:
@@ -29,41 +30,43 @@ class TLibrary {
 	virtual auto RemoveUser(unsigned id) -> std::expected<void, std::invalid_argument>;
 	
 	protected:
-	template<UserDerivable T>
-	static auto FindById(const std::vector<std::shared_ptr<T>>& users, unsigned id) {
-		return std::find_if(users.begin(), users.end(), [id](const auto& u) {
+	template<CIdMixin T>
+	static auto FindById(const std::vector<std::shared_ptr<T>>& cont, unsigned id) {
+		return std::find_if(cont.begin(), cont.end(), [id](const auto& u) {
 			return id==u->Id();
 		});
 	}
 	
-	template<UserDerivable T>
-	static auto RemoveById(std::vector<std::shared_ptr<T>>& users, unsigned id)
+	template<CIdMixin T>
+	static auto RemoveById(std::vector<std::shared_ptr<T>>& cont, unsigned id)
 		-> std::expected<void, std::invalid_argument> {
 		
-		const auto it = FindById(users, id);
-		if(it==users.end()) {
+		const auto it = FindById(cont, id);
+		if(it==cont.end()) {
 			return std::unexpected(std::invalid_argument(std::format(R"(There is no id "{}")", id)));
 		}
 		
-		users.erase(it);
+		cont.erase(it);
 	}
 	
-	template<UserDerivable T>
-	static auto IsUniqueId(const std::vector<std::shared_ptr<T>>& users, unsigned id) {
-		return FindById(users, id)==users.end();
+	template<CIdMixin T>
+	static auto IsUniqueId(const std::vector<std::shared_ptr<T>>& cont, unsigned id) {
+		return FindById(cont, id)==cont.end();
 	}
 	
-	template<UserDerivable T>
-	static auto AddToContainer(std::vector<std::shared_ptr<T>>& users, const std::shared_ptr<T>& user) {
-		if(!IsUniqueId(users, user->Id())) {
-			return std::unexpected(std::logic_error(std::format(R"(Id "{}" is not unique)", user->Id())));
+	template<CIdMixin T>
+	static auto AddToContainer(std::vector<std::shared_ptr<T>>& cont, const std::shared_ptr<T>& el) {
+		if(!IsUniqueId(cont, el->Id())) {
+			return std::unexpected(std::logic_error(std::format(R"(Id "{}" is not unique)", el->Id())));
 		}
-		users.emplace_back(user);
+		cont.emplace_back(el);
 	}
 	
 	protected:
 	std::vector<std::shared_ptr<TWorker>> m_vWorkers;
 	std::vector<std::shared_ptr<TUser>> m_vUsers;
+	
+	std::vector<std::pair<unsigned, unsigned>> m_vBorrowedBooks;
 };
 
 

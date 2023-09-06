@@ -7,4 +7,8 @@ add_executable(${PROJECT_NAME} main.cpp TWorker.cpp TWorker.h EGender.h
         TLibrary.h
         TLibrary.cpp
         TUser.h
-        TUser.cpp)
+        TUser.cpp
+        TBook.h
+        TBook.cpp
+        TIdMixin.h
+        TIdMixin.cpp)
