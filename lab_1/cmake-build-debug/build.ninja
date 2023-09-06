@@ -61,6 +61,12 @@ build CMakeFiles/lab_1.dir/TWorker.cpp.obj: CXX_COMPILER__lab_1_Debug C$:/Users/
   OBJECT_DIR = CMakeFiles\lab_1.dir
   OBJECT_FILE_DIR = CMakeFiles\lab_1.dir
 
+build CMakeFiles/lab_1.dir/Errors/TInvalidIdException.cpp.obj: CXX_COMPILER__lab_1_Debug C$:/Users/User/Desktop/SystemProgrammingWithCPP/lab_1/Errors/TInvalidIdException.cpp || cmake_object_order_depends_target_lab_1
+  DEP_FILE = CMakeFiles\lab_1.dir\Errors\TInvalidIdException.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\lab_1.dir
+  OBJECT_FILE_DIR = CMakeFiles\lab_1.dir\Errors
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target lab_1
@@ -69,7 +75,7 @@ build CMakeFiles/lab_1.dir/TWorker.cpp.obj: CXX_COMPILER__lab_1_Debug C$:/Users/
 #############################################
 # Link the executable lab_1.exe
 
-build lab_1.exe: CXX_EXECUTABLE_LINKER__lab_1_Debug CMakeFiles/lab_1.dir/main.cpp.obj CMakeFiles/lab_1.dir/TWorker.cpp.obj
+build lab_1.exe: CXX_EXECUTABLE_LINKER__lab_1_Debug CMakeFiles/lab_1.dir/main.cpp.obj CMakeFiles/lab_1.dir/TWorker.cpp.obj CMakeFiles/lab_1.dir/Errors/TInvalidIdException.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\lab_1.dir

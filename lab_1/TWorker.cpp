@@ -5,7 +5,9 @@ int TWorker::Id() const {
 }
 
 void TWorker::Id(int id) {
-
+    if(id<=0) {
+        throw ""
+    }
 }
 
 const std::string &TWorker::Name() const {
@@ -16,11 +18,11 @@ void TWorker::Name(const std::string &name) {
 
 }
 
-const std::string &TWorker::Patronym() const {
-    return m_sPatronym;
+const std::string &TWorker::MiddleName() const {
+    return m_sMiddleName;
 }
 
-void TWorker::Patronym(const std::string &name) {
+void TWorker::MiddleName(const std::string &middleName) {
 
 }
 
@@ -28,7 +30,7 @@ const std::string &TWorker::Surname() const {
     return m_sSurname;
 }
 
-void TWorker::Surname(const std::string &name) {
+void TWorker::Surname(const std::string &surname) {
 
 }
 
@@ -44,7 +46,7 @@ const std::string &TWorker::Residence() const {
     return m_sResidence;
 }
 
-void TWorker::Residence(const std::string &name) {
+void TWorker::Residence(const std::string &residence) {
 
 }
 
@@ -60,14 +62,14 @@ const std::string &TWorker::PassportData() const {
     return m_sPassportData;
 }
 
-void TWorker::PassportData(const std::string &name) {
+void TWorker::PassportData(const std::string &passportData) {
 
 }
 
 int TWorker::PositionId() const {
-    return 0;
+    return m_iPositionId;
 }
 
-void TWorker::PositionId(int age) {
+void TWorker::PositionId(int positionId) {
 
 }
