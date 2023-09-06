@@ -3,4 +3,4 @@ project(lab_1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(lab_1 main.cpp TWorker.cpp TWorker.h)
+add_executable(lab_1 main.cpp TWorker.cpp TWorker.h EGender.h)
