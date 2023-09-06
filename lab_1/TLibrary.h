@@ -10,6 +10,7 @@
 class TIdMixin;
 class TUser;
 class TWorker;
+class TBook;
 
 template<typename T>
 concept CIdMixin = std::is_base_of_v<TIdMixin, T>;
@@ -65,7 +66,7 @@ class TLibrary {
 	protected:
 	std::vector<std::shared_ptr<TWorker>> m_vWorkers;
 	std::vector<std::shared_ptr<TUser>> m_vUsers;
-	
+	std::vector<std::shared_ptr<TBook>> m_vBooks;
 	std::vector<std::pair<unsigned, unsigned>> m_vBorrowedBooks;
 };
 
