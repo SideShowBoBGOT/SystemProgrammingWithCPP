@@ -1,8 +1,6 @@
 #include "TUser.h"
 
-#include <variant>
-#define FMT_HEADER_ONLY
-#include <fmt/core.h>
+#include <format>
 
 unsigned int TUser::Id() const {
     return 0;
@@ -40,14 +38,11 @@ EGender TUser::Gender() const {
     return m_xGender;
 }
 
-auto TUser::Gender(EGender gender) -> std::variant<std::monostate, std::invalid_argument> {
+auto TUser::Gender(EGender gender) -> std::expected<void, std::invalid_argument> {
 	if(gender==EGender::None) {
-		return std::invalid_argument(
-			fmt::format("Gender can not be none")
-		);
+		return std::unexpected(std::invalid_argument("Gender can not be none"));
 	}
 	m_xGender = gender;
-	return std::monostate{};
 }
 
 const std::string &TUser::Residence() const {
@@ -62,7 +57,7 @@ unsigned int TUser::Age() const {
     return m_uAge;
 }
 
-void TUser::Age(unsigned int age) {
+auto TUser::Age(unsigned int age) -> std::expected<void, std::invalid_argument> {
 	m_uAge = age;
 }
 

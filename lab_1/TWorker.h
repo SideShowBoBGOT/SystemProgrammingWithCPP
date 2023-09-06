@@ -9,7 +9,7 @@ class TWorker : public TUser {
 	virtual ~TWorker()=default;
 
     public:
-	virtual void Age(unsigned age) override;
+	virtual auto Age(unsigned age) -> std::expected<void, std::invalid_argument> override;
  
 	virtual unsigned PositionId() const;
     virtual void PositionId(unsigned positionId);

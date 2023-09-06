@@ -2,9 +2,10 @@
 #define LAB_1_TUSER_H
 
 #include <iostream>
-#include "EGender.h"
+#include <memory>
+#include <expected>
 
-#include <variant>
+#include "EGender.h"
 
 class TUser {
 	public:
@@ -25,13 +26,13 @@ class TUser {
     virtual void Surname(const std::string& surname);
 
     virtual EGender Gender() const;
-    virtual auto Gender(EGender gender) -> std::variant<std::monostate, std::invalid_argument>;
+    virtual auto Gender(EGender gender) -> std::expected<void, std::invalid_argument>;
 
     virtual const std::string& Residence() const;
     virtual void Residence(const std::string& residence);
 
     virtual unsigned Age() const;
-    virtual void Age(unsigned age);
+    virtual auto Age(unsigned age) -> std::expected<void, std::invalid_argument>;
 
     virtual const std::string& PassportData() const;
     virtual void PassportData(const std::string& passportData);
