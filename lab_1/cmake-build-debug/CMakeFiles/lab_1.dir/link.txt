@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/lab_1.dir/main.cpp.o CMakeFiles/lab_1.dir/TWorker.cpp.o CMakeFiles/lab_1.dir/TLibrary.cpp.o CMakeFiles/lab_1.dir/TUser.cpp.o -o lab_1 
