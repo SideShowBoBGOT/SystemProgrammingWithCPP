@@ -22,17 +22,27 @@ class TLibrary {
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TWorker>>& Workers() const;
-	virtual auto AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<void, std::logic_error>;
+	virtual auto AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<void, std::invalid_argument>;
 	virtual auto RemoveWorker(unsigned id) -> std::expected<void, std::invalid_argument>;
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TUser>>& Users() const;
-	virtual auto AddUser(const std::shared_ptr<TUser>& user) -> std::expected<void, std::logic_error>;
+	virtual auto AddUser(const std::shared_ptr<TUser>& user) -> std::expected<void, std::invalid_argument>;
 	virtual auto RemoveUser(unsigned id) -> std::expected<void, std::invalid_argument>;
+
+    public:
+    virtual const std::vector<std::shared_ptr<TBook>>& Books() const;
+    virtual auto AddBook(const std::shared_ptr<TBook>& book) -> std::expected<void, std::invalid_argument>;
+    virtual auto RemoveBook(unsigned id) -> std::expected<void, std::invalid_argument>;
+
+    public:
+    //virtual auto BorrowBook(unsigned bookId, unsigned userId) -> std::expected<void, std::invalid_argument>;
 	
 	protected:
 	template<CIdMixin T>
-	static auto FindById(const std::vector<std::shared_ptr<T>>& cont, unsigned id) {
+	static auto FindById(const std::vector<std::shared_ptr<T>>& cont, unsigned id)
+        -> std::vector<std::shared_ptr<T>>::const_iterator {
+
 		return std::find_if(cont.begin(), cont.end(), [id](const auto& u) {
 			return id==u->Id();
 		});
@@ -51,14 +61,17 @@ class TLibrary {
 	}
 	
 	template<CIdMixin T>
-	static auto IsUniqueId(const std::vector<std::shared_ptr<T>>& cont, unsigned id) {
+	static auto IsUniqueId(const std::vector<std::shared_ptr<T>>& cont, unsigned id)
+        -> std::vector<std::shared_ptr<T>>::const_iterator {
+
 		return FindById(cont, id)==cont.end();
 	}
 	
 	template<CIdMixin T>
-	static auto AddToContainer(std::vector<std::shared_ptr<T>>& cont, const std::shared_ptr<T>& el) {
+	static auto AddToContainer(std::vector<std::shared_ptr<T>>& cont, const std::shared_ptr<T>& el)
+        -> std::expected<void, std::invalid_argument> {
 		if(!IsUniqueId(cont, el->Id())) {
-			return std::unexpected(std::logic_error(std::format(R"(Id "{}" is not unique)", el->Id())));
+			return std::unexpected(std::invalid_argument(std::format(R"(Id "{}" is not unique)", el->Id())));
 		}
 		cont.emplace_back(el);
 	}
