@@ -3,13 +3,15 @@
 
 #include "TUser.h"
 
+class TAgeTooSmallException;
+
 class TWorker : public TUser {
     public:
     TWorker()=default;
 	virtual ~TWorker()=default;
 
     public:
-	virtual auto Age(unsigned age) -> std::expected<void, std::invalid_argument> override;
+	virtual auto Age(unsigned age) -> std::expected<void, TAgeTooSmallException> override;
  
 	virtual unsigned PositionId() const;
     virtual void PositionId(unsigned positionId);

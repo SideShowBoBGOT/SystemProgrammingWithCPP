@@ -1,4 +1,6 @@
 #include "TUser.h"
+#include "Error/TGenderNoneException.h"
+#include "Error/TAgeTooSmallException.h"
 
 #include <format>
 
@@ -30,9 +32,9 @@ EGender TUser::Gender() const {
     return m_xGender;
 }
 
-auto TUser::Gender(EGender gender) -> std::expected<void, std::invalid_argument> {
+auto TUser::Gender(EGender gender) -> std::expected<void, TGenderNoneException> {
 	if(gender==EGender::None) {
-		return std::unexpected(std::invalid_argument("Gender can not be none"));
+		return std::unexpected(TGenderNoneException());
 	}
 	m_xGender = gender;
 }
@@ -49,7 +51,7 @@ unsigned int TUser::Age() const {
     return m_uAge;
 }
 
-auto TUser::Age(unsigned int age) -> std::expected<void, std::invalid_argument> {
+auto TUser::Age(unsigned int age) -> std::expected<void, TAgeTooSmallException> {
 	m_uAge = age;
 }
 

@@ -8,6 +8,8 @@
 #include "EGender.h"
 #include "TIdMixin.h"
 
+class TGenderNoneException;
+class TAgeTooSmallException;
 
 class TUser : public TIdMixin {
 	public:
@@ -25,13 +27,13 @@ class TUser : public TIdMixin {
     virtual void Surname(const std::string& surname);
 
     virtual EGender Gender() const;
-    virtual auto Gender(EGender gender) -> std::expected<void, std::invalid_argument>;
+    virtual auto Gender(EGender gender) -> std::expected<void, TGenderNoneException>;
 
     virtual const std::string& Residence() const;
     virtual void Residence(const std::string& residence);
 
     virtual unsigned Age() const;
-    virtual auto Age(unsigned age) -> std::expected<void, std::invalid_argument>;
+    virtual auto Age(unsigned age) -> std::expected<void, TAgeTooSmallException>;
 
     virtual const std::string& PassportData() const;
     virtual void PassportData(const std::string& passportData);

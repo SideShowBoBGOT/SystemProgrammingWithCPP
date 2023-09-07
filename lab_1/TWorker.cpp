@@ -1,4 +1,5 @@
 #include "TWorker.h"
+#include "Error/TAgeTooSmallException.h"
 
 #include <format>
 
@@ -12,13 +13,9 @@ void TWorker::PositionId(unsigned positionId) {
 	m_uPositionId = positionId;
 }
 
-auto TWorker::Age(unsigned age) -> std::expected<void, std::invalid_argument> {
+auto TWorker::Age(unsigned age) -> std::expected<void, TAgeTooSmallException> {
 	if(age <= s_dMinWorkerAge) {
-		return std::unexpected(
-			std::invalid_argument(
-				std::format(R"(Age of worker "{}" is less than minimal age "{}")", age, s_dMinWorkerAge)
-			)
-		);
+		return std::unexpected(TAgeTooSmallException(age, s_dMinWorkerAge));
 	}
 	return TUser::Age(age);
 }
