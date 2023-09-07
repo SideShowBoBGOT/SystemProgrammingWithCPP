@@ -1,6 +1,6 @@
 #include "TUser.h"
-#include "Error/TGenderNoneException.h"
-#include "Error/TAgeTooSmallException.h"
+#include "../Error/TGenderNoneException.h"
+#include "../Error/TAgeTooSmallException.h"
 
 #include <format>
 

@@ -3,12 +3,15 @@ project(lab_1)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(${PROJECT_NAME} main.cpp TWorker.cpp TWorker.h EGender.h
-        TLibrary.h
-        TLibrary.cpp
-        TUser.h
-        TUser.cpp
-        TBook.h
-        TBook.cpp
-        TIdMixin.h
-        TIdMixin.cpp Error/TIdNotExistException.cpp Error/TIdNotExistException.h Error/TGenderNoneException.cpp Error/TGenderNoneException.h Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h)
+add_executable(${PROJECT_NAME} main.cpp Models/TWorker.cpp Models/TWorker.h Models/EGender.h
+        Controllers/TLibrary.h
+        Controllers/TLibrary.cpp
+        Models/TUser.h
+        Models/TUser.cpp
+        Models/TBook.h
+        Models/TBook.cpp
+        Models/TIdMixin.h
+        Models/TIdMixin.cpp Error/TGenderNoneException.cpp Error/TGenderNoneException.h Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h
+        Error/TVariadicNumberException.h
+        Helpers/TStringLiteral.h
+        Helpers/SVariadicElementsString.h)
