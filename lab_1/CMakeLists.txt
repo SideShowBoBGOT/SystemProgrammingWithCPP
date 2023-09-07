@@ -11,4 +11,4 @@ add_executable(${PROJECT_NAME} main.cpp TWorker.cpp TWorker.h EGender.h
         TBook.h
         TBook.cpp
         TIdMixin.h
-        TIdMixin.cpp)
+        TIdMixin.cpp Error/TIdNotExistException.cpp Error/TIdNotExistException.h)
