@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <expected>
+#include <variant>
 
 #include "EGender.h"
 #include "TIdMixin.h"
@@ -32,7 +33,7 @@ class TUser : public TIdMixin {
     virtual void Residence(const std::string& residence);
 
     virtual unsigned Age() const;
-    virtual auto Age(unsigned age) -> std::expected<void, TAgeTooSmallException>;
+    virtual auto Age(unsigned age) -> std::expected<std::monostate, TAgeTooSmallException>;
 
     virtual const std::string& PassportData() const;
     virtual void PassportData(const std::string& passportData);

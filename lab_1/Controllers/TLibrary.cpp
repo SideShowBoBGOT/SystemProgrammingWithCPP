@@ -6,11 +6,11 @@ const std::vector<std::shared_ptr<TWorker>>& TLibrary::Workers() const {
 	return m_vWorkers;
 }
 
-auto TLibrary::AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<void, TIdNotUniqueException> {
+auto TLibrary::AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<std::monostate, TIdNotUniqueException> {
 	return AddToContainer(m_vWorkers, worker);
 }
 
-auto TLibrary::RemoveWorker(unsigned int id) -> std::expected<void, TIdNotExistException> {
+auto TLibrary::RemoveWorker(unsigned int id) -> std::expected<std::monostate, TIdNotExistException> {
 	return RemoveById(m_vWorkers, id);
 }
 
@@ -18,12 +18,12 @@ const std::vector<std::shared_ptr<TUser>>& TLibrary::Users() const {
 	return m_vUsers;
 }
 
-auto TLibrary::AddUser(const std::shared_ptr<TUser>& user) -> std::expected<void, TIdNotUniqueException> {
+auto TLibrary::AddUser(const std::shared_ptr<TUser>& user) -> std::expected<std::monostate, TIdNotUniqueException> {
 	return AddToContainer(m_vUsers, user);
 }
 
 auto TLibrary::RemoveUser(unsigned id)
-	-> std::expected<void, std::variant<TIdNotExistException, TForeignIdException>> {
+	-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>> {
 	
 	const auto userIt = std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
 		[id](const auto& el) {
@@ -40,12 +40,12 @@ const std::vector<std::shared_ptr<TBook>> &TLibrary::Books() const {
     return m_vBooks;
 }
 
-auto TLibrary::AddBook(const std::shared_ptr<TBook> &book) -> std::expected<void, TIdNotUniqueException> {
+auto TLibrary::AddBook(const std::shared_ptr<TBook> &book) -> std::expected<std::monostate, TIdNotUniqueException> {
     return AddToContainer(m_vBooks, book);
 }
 
 auto TLibrary::RemoveBook(unsigned id)
-	-> std::expected<void, std::variant<TIdNotExistException, TForeignIdException>> {
+	-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>> {
 	
 	const auto userIt = std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
 		[id](const auto& el) {
@@ -70,7 +70,7 @@ std::vector<std::shared_ptr<TBook>> TLibrary::AvailableBooks() const {
 }
 
 auto TLibrary::BorrowBook(unsigned bookId, unsigned userId)
-    -> std::expected<void, std::variant<TIdNotExistException, TIdNotUniqueException>> {
+    -> std::expected<std::monostate, std::variant<TIdNotExistException, TIdNotUniqueException>> {
     
 	if(!IsContainId(m_vBooks, bookId)) {
 		return std::unexpected(TIdNotExistException(bookId));
@@ -83,10 +83,12 @@ auto TLibrary::BorrowBook(unsigned bookId, unsigned userId)
 	}
 	
 	m_vBorrowedBooks.emplace_back(bookId, userId);
+	
+	return std::monostate();
 }
 
 auto TLibrary::ReturnBook(unsigned int bookId, unsigned int userId)
-    -> std::expected<void, TIdNotExistException> {
+    -> std::expected<std::monostate, TIdNotExistException> {
     
     const auto it = std::find(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(), SUserBook{userId, bookId});
     
@@ -95,6 +97,8 @@ auto TLibrary::ReturnBook(unsigned int bookId, unsigned int userId)
     }
 	
 	m_vBorrowedBooks.erase(it);
+	
+	return std::monostate();
 }
 
 TLibrary::SUserBook::SUserBook(unsigned userId, unsigned bookId)

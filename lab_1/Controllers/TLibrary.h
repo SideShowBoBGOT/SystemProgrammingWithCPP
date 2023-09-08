@@ -23,24 +23,24 @@ class TLibrary {
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TWorker>>& Workers() const;
-	virtual auto AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<void, TIdNotUniqueException>;
-	virtual auto RemoveWorker(unsigned id) -> std::expected<void, TIdNotExistException>;
+	virtual auto AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<std::monostate, TIdNotUniqueException>;
+	virtual auto RemoveWorker(unsigned id) -> std::expected<std::monostate, TIdNotExistException>;
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TUser>>& Users() const;
-	virtual auto AddUser(const std::shared_ptr<TUser>& user) -> std::expected<void, TIdNotUniqueException>;
-	virtual auto RemoveUser(unsigned id) -> std::expected<void, std::variant<TIdNotExistException, TForeignIdException>>;
+	virtual auto AddUser(const std::shared_ptr<TUser>& user) -> std::expected<std::monostate, TIdNotUniqueException>;
+	virtual auto RemoveUser(unsigned id) -> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
     virtual const std::vector<std::shared_ptr<TBook>>& Books() const;
-    virtual auto AddBook(const std::shared_ptr<TBook>& book) -> std::expected<void, TIdNotUniqueException>;
-    virtual auto RemoveBook(unsigned id) -> std::expected<void, std::variant<TIdNotExistException, TForeignIdException>>;
+    virtual auto AddBook(const std::shared_ptr<TBook>& book) -> std::expected<std::monostate, TIdNotUniqueException>;
+    virtual auto RemoveBook(unsigned id) -> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
     virtual std::vector<std::shared_ptr<TBook>> AvailableBooks() const;
     virtual auto BorrowBook(unsigned bookId, unsigned userId)
-    	-> std::expected<void, std::variant<TIdNotExistException, TIdNotUniqueException>>;
-	virtual auto ReturnBook(unsigned bookId, unsigned userId) -> std::expected<void, TIdNotExistException>;
+    	-> std::expected<std::monostate, std::variant<TIdNotExistException, TIdNotUniqueException>>;
+	virtual auto ReturnBook(unsigned bookId, unsigned userId) -> std::expected<std::monostate, TIdNotExistException>;
 
 	protected:
 	template<CIdMixin T>
@@ -51,12 +51,14 @@ class TLibrary {
 	}
 
 	template<CIdMixin T>
-	static auto RemoveById(std::vector<std::shared_ptr<T>>& cont, unsigned id) {
+	static auto RemoveById(std::vector<std::shared_ptr<T>>& cont, unsigned id)
+		-> std::expected<std::monostate, TIdNotExistException> {
 		const auto it = FindById(cont, id);
 		if(it==cont.end()) {
 			return std::unexpected(TIdNotExistException(id));
 		}
 		cont.erase(it);
+		return std::monostate();
 	}
 	
 	template<CIdMixin T>
@@ -66,12 +68,13 @@ class TLibrary {
 	
 	template<CIdMixin T>
 	static auto AddToContainer(std::vector<std::shared_ptr<T>>& cont, const std::shared_ptr<T>& el)
-		-> std::expected<void, TIdNotUniqueException> {
+		-> std::expected<std::monostate, TIdNotUniqueException> {
 		
 		if(IsContainId(cont, el->Id())) {
 			return std::unexpected(TIdNotUniqueException(el->Id()));
 		}
 		cont.emplace_back(el);
+		return std::monostate();
 	}
 	
 	template<typename T>

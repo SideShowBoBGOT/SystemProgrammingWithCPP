@@ -11,7 +11,7 @@ class TWorker : public TUser {
 	virtual ~TWorker()=default;
 
     public:
-	virtual auto Age(unsigned age) -> std::expected<void, TAgeTooSmallException> override;
+	virtual auto Age(unsigned age) -> std::expected<std::monostate, TAgeTooSmallException> override;
  
 	virtual unsigned PositionId() const;
     virtual void PositionId(unsigned positionId);

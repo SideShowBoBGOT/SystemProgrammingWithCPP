@@ -25,25 +25,27 @@ TCustomCLI::TCustomCLI(const std::string& name)
 	
 	addUserCommand->parse_complete_callback([this, addUserCommand](){
 		auto user = std::make_shared<TUser>();
+		user->Id(addUserCommand->get_option("--id")->as<unsigned>());
 		user->Name(addUserCommand->get_option("--name")->as<std::string>());
 		user->MiddleName(addUserCommand->get_option("--middle-name")->as<std::string>());
 		user->Surname(addUserCommand->get_option("--surname")->as<std::string>());
 		user->Gender(addUserCommand->get_option("--gender")->as<EGender>());
 		user->Residence(addUserCommand->get_option("--residence")->as<std::string>());
 		user->Age(addUserCommand->get_option("--age")->as<unsigned>()).value();
-		user->PassportData(addUserCommand->get_option("--passportData")->as<std::string>());
+		user->PassportData(addUserCommand->get_option("--passport-data")->as<std::string>());
 		m_pLibrary->AddUser(user).value();
 	});
 	
 	addWorkerCommand->parse_complete_callback([this, addWorkerCommand]() {
 		auto worker = std::make_shared<TWorker>();
+		worker->Id(addWorkerCommand->get_option("--id")->as<unsigned >());
 		worker->Name(addWorkerCommand->get_option("--name")->as<std::string>());
 		worker->MiddleName(addWorkerCommand->get_option("--middle-name")->as<std::string>());
 		worker->Surname(addWorkerCommand->get_option("--surname")->as<std::string>());
 		worker->Gender(addWorkerCommand->get_option("--gender")->as<EGender>());
 		worker->Residence(addWorkerCommand->get_option("--residence")->as<std::string>());
 		worker->Age(addWorkerCommand->get_option("--age")->as<unsigned>()).value();
-		worker->PassportData(addWorkerCommand->get_option("--passportData")->as<std::string>());
+		worker->PassportData(addWorkerCommand->get_option("--passport-data")->as<std::string>());
 		worker->PositionId(addWorkerCommand->get_option("--position-id")->as<unsigned >());
 		m_pLibrary->AddWorker(worker).value();
 	});
@@ -84,8 +86,7 @@ CLI::App* TCustomCLI::DecorateAddCommandWithCommonOptions(const std::string& suf
 	const auto age = subcommand
 		->add_option("--age,-a")
 		->description(std::format(R"({}'s age)", suffix))
-		->required(true)
-		->check(CLI::PositiveNumber);
+		->required(true);
 	const auto passportData = subcommand
 		->add_option("--passport-data")
 		->description(std::format(R"({}'s passport data)", suffix))

@@ -13,7 +13,7 @@ void TWorker::PositionId(unsigned positionId) {
 	m_uPositionId = positionId;
 }
 
-auto TWorker::Age(unsigned age) -> std::expected<void, TAgeTooSmallException> {
+auto TWorker::Age(unsigned age) -> std::expected<std::monostate, TAgeTooSmallException> {
 	if(age <= s_dMinWorkerAge) {
 		return std::unexpected(TAgeTooSmallException(age, s_dMinWorkerAge));
 	}

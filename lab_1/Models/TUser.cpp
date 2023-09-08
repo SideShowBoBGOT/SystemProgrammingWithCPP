@@ -47,8 +47,9 @@ unsigned int TUser::Age() const {
     return m_uAge;
 }
 
-auto TUser::Age(unsigned int age) -> std::expected<void, TAgeTooSmallException> {
+auto TUser::Age(unsigned age) -> std::expected<std::monostate, TAgeTooSmallException> {
 	m_uAge = age;
+	return std::monostate();
 }
 
 const std::string &TUser::PassportData() const {
