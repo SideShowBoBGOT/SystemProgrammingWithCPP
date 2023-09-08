@@ -1,6 +1,6 @@
 #include <format>
 
-#include "CLI/CLI.hpp"
+
 #include "TCustomCLI.h"
 
 #include "../Helpers/NNHelperFuncs.h"
@@ -10,15 +10,16 @@
 #include "../Error/TAgeTooSmallException.h"
 #include "../Controllers/TLibrary.h"
 
-TCustomCLI::TCustomCLI() {
-	m_pApp = std::make_unique<CLI::App>();
-	m_pLibrary = std::make_unique<TLibrary>();
+TCustomCLI::TCustomCLI(const std::string& name)
+	: CLI::App(name) {
+	
+	m_pLibrary = std::make_shared<TLibrary>();
 	
 	auto addUserCommand = DecorateAddCommandWithCommonOptions("user");
 	auto addWorkerCommand = DecorateAddCommandWithCommonOptions("worker");
 	
 	addWorkerCommand
-		->add_option("--position-id,-pi")
+		->add_option("--position-id")
 		->description("worker's position id")
 		->required(true);
 	
@@ -48,12 +49,12 @@ TCustomCLI::TCustomCLI() {
 	});
 }
 
-void TCustomCLI::Execute() {
-
-}
-
 CLI::App* TCustomCLI::DecorateAddCommandWithCommonOptions(const std::string& suffix) {
-	auto subcommand = m_pApp->add_subcommand("add-" + suffix);
+	auto subcommand = add_subcommand("add-" + suffix);
+	const auto id = subcommand
+		->add_option("--id,-i")
+		->description(std::format(R"({}'s id)", suffix))
+		->required(true);
 	const auto name = subcommand
 		->add_option("--name,-n")
 		->description(std::format(R"({}'s name)", suffix))
@@ -86,11 +87,10 @@ CLI::App* TCustomCLI::DecorateAddCommandWithCommonOptions(const std::string& suf
 		->required(true)
 		->check(CLI::PositiveNumber);
 	const auto passportData = subcommand
-		->add_option("--passport-data,-pd")
+		->add_option("--passport-data")
 		->description(std::format(R"({}'s passport data)", suffix))
 		->required(true);
 	
 	return subcommand;
 }
-
 

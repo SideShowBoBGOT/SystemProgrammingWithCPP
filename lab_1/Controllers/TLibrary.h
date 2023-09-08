@@ -65,7 +65,9 @@ class TLibrary {
 	}
 	
 	template<CIdMixin T>
-	static auto AddToContainer(std::vector<std::shared_ptr<T>>& cont, const std::shared_ptr<T>& el) {
+	static auto AddToContainer(std::vector<std::shared_ptr<T>>& cont, const std::shared_ptr<T>& el)
+		-> std::expected<void, TIdNotUniqueException> {
+		
 		if(IsContainId(cont, el->Id())) {
 			return std::unexpected(TIdNotUniqueException(el->Id()));
 		}

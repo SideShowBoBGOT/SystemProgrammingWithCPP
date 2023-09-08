@@ -4,26 +4,19 @@
 #include <string>
 #include <memory>
 
-namespace CLI {
-	class App;
-}
+#include "CLI/CLI.hpp"
 
 class TLibrary;
 
-class TCustomCLI {
+class TCustomCLI : public CLI::App {
 	public:
-	TCustomCLI();
-	virtual ~TCustomCLI()=default;
+	explicit TCustomCLI(const std::string& name);
 	
-	public:
-	void Execute();
-
 	protected:
 	CLI::App* DecorateAddCommandWithCommonOptions(const std::string& suffix);
 	
 	protected:
-	std::unique_ptr<CLI::App> m_pApp;
-	std::unique_ptr<TLibrary> m_pLibrary;
+	std::shared_ptr<TLibrary> m_pLibrary;
 };
 
 

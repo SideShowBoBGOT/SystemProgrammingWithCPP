@@ -14,6 +14,7 @@ class TVariadicNumberException : public std::exception {
     explicit TVariadicNumberException(Id id, Ids... ids) {
     	m_sMessage = (std::format(Literal.Value, SVariadicElementsString<Id, Ids...>()(id, ids...)));
     }
+    virtual ~TVariadicNumberException()=default;
 
     public:
     virtual const char* what() const noexcept override {

@@ -7,6 +7,7 @@
 class TAgeTooSmallException : std::exception {
     public:
     TAgeTooSmallException(unsigned age, unsigned minAge);
+    virtual ~TAgeTooSmallException()=default;
 
     public:
     virtual const char* what() const noexcept override;
