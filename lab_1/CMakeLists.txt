@@ -13,9 +13,11 @@ add_executable(${PROJECT_NAME} main.cpp Models/TWorker.cpp Models/TWorker.h Mode
         Models/TIdMixin.h
         Models/TIdMixin.cpp Error/TGenderNoneException.cpp Error/TGenderNoneException.h Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h
         Error/TVariadicNumberException.h
-        Helpers/TStringLiteral.h
+        Helpers/SStringLiteral.h
         Helpers/SVariadicElementsString.h
+        Helpers/NNHelperFuncs.h
+        Helpers/NNHelperFuncs.cpp
 )
 
-add_subdirectory(external/CLI11)
-target_link_libraries(${PROJECT_NAME} CLI11::CLI11)
+include_directories(external/CLI11/include)
+include_directories(external/magic_enum/include)

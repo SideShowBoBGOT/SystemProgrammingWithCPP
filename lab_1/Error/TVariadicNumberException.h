@@ -4,10 +4,10 @@
 #include <exception>
 #include <format>
 
-#include "../Helpers/TStringLiteral.h"
+#include "../Helpers/SStringLiteral.h"
 #include "../Helpers/SVariadicElementsString.h"
 
-template<TStringLiteral Literal>
+template<SStringLiteral Literal>
 class TVariadicNumberException : public std::exception {
 	public:
 	template<typename Id, typename ...Ids>
