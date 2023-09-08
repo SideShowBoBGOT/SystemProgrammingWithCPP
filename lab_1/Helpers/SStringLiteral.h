@@ -5,7 +5,7 @@
 #include <algorithm>
 
 template<unsigned N>
-class SStringLiteral {
+struct SStringLiteral {
     constexpr SStringLiteral(const char (&str)[N]) {
         std::copy_n(str, N, Value);
     }

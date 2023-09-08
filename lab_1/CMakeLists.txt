@@ -11,12 +11,14 @@ add_executable(${PROJECT_NAME} main.cpp Models/TWorker.cpp Models/TWorker.h Mode
         Models/TBook.h
         Models/TBook.cpp
         Models/TIdMixin.h
-        Models/TIdMixin.cpp Error/TGenderNoneException.cpp Error/TGenderNoneException.h Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h
+        Models/TIdMixin.cpp Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h
         Error/TVariadicNumberException.h
         Helpers/SStringLiteral.h
         Helpers/SVariadicElementsString.h
         Helpers/NNHelperFuncs.h
         Helpers/NNHelperFuncs.cpp
+        Views/TCustomCLI.h
+        Views/TCustomCLI.cpp
 )
 
 include_directories(external/CLI11/include)

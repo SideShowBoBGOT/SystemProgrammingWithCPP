@@ -1,5 +1,4 @@
 #include "TUser.h"
-#include "../Error/TGenderNoneException.h"
 #include "../Error/TAgeTooSmallException.h"
 
 #include <format>
@@ -32,10 +31,7 @@ EGender TUser::Gender() const {
     return m_xGender;
 }
 
-auto TUser::Gender(EGender gender) -> std::expected<void, TGenderNoneException> {
-	if(gender==EGender::None) {
-		return std::unexpected(TGenderNoneException());
-	}
+void TUser::Gender(EGender gender) {
 	m_xGender = gender;
 }
 

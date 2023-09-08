@@ -4,7 +4,6 @@
 enum class EGender {
     Male,
     Female,
-    None
 };
 
 #endif //LAB_1_EGENDER_H
