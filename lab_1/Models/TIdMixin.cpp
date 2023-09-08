@@ -1,7 +1,7 @@
 #include "TIdMixin.h"
 
 unsigned int TIdMixin::Id() const {
-    return 0;
+    return m_uId;
 }
 
 void TIdMixin::Id(unsigned id) {

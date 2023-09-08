@@ -40,7 +40,7 @@ auto TLibrary::RemoveBook(unsigned int id) -> std::expected<void, TIdNotExistExc
 
 std::vector<std::shared_ptr<TBook>> TLibrary::AvailableBooks() const {
 	auto vv = std::vector<std::shared_ptr<TBook>>();
-	std::copy_if(vv.begin(), vv.end(), std::back_inserter(vv), [this](const auto& el) {
+	std::copy_if(m_vBooks.begin(), m_vBooks.end(), std::back_inserter(vv), [this](const auto& el) {
 		return std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(), [bookId=el->Id()](const auto& p) {
 			return p.first == bookId;
 		}) == m_vBorrowedBooks.end();
