@@ -16,3 +16,6 @@ add_executable(${PROJECT_NAME} main.cpp Models/TWorker.cpp Models/TWorker.h Mode
         Helpers/TStringLiteral.h
         Helpers/SVariadicElementsString.h
 )
+
+add_subdirectory(external/CLI11)
+target_link_libraries(${PROJECT_NAME} CLI11::CLI11)
