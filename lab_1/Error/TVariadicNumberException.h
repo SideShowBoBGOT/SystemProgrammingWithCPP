@@ -26,5 +26,6 @@ class TVariadicNumberException : public std::exception {
 
 using TIdNotUniqueException = TVariadicNumberException<R"(Id ({}) is not unique)">;
 using TIdNotExistException = TVariadicNumberException<R"(Id ({}) does not exist)">;
+using TForeignIdException = TVariadicNumberException<R"(Foreign reference to Id ({}) exists)">;
 
 #endif //LAB_1_TVARIADICNUMBEREXCEPTION_H

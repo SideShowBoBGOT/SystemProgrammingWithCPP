@@ -22,6 +22,7 @@ add_executable(${PROJECT_NAME} main.cpp Models/TWorker.cpp Models/TWorker.h Mode
         Models/TIdMixin.cpp Error/TGenderNoneException.cpp Error/TGenderNoneException.h Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h
         Error/TVariadicNumberException.h
         Helpers/TStringLiteral.h
-        Helpers/SVariadicElementsString.h)
+        Helpers/SVariadicElementsString.h
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE cli::cli)

@@ -29,18 +29,17 @@ class TLibrary {
 	public:
 	virtual const std::vector<std::shared_ptr<TUser>>& Users() const;
 	virtual auto AddUser(const std::shared_ptr<TUser>& user) -> std::expected<void, TIdNotUniqueException>;
-	virtual auto RemoveUser(unsigned id) -> std::expected<void, TIdNotExistException>;
+	virtual auto RemoveUser(unsigned id) -> std::expected<void, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
     virtual const std::vector<std::shared_ptr<TBook>>& Books() const;
     virtual auto AddBook(const std::shared_ptr<TBook>& book) -> std::expected<void, TIdNotUniqueException>;
-    virtual auto RemoveBook(unsigned id) -> std::expected<void, TIdNotExistException>;
+    virtual auto RemoveBook(unsigned id) -> std::expected<void, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
     virtual std::vector<std::shared_ptr<TBook>> AvailableBooks() const;
     virtual auto BorrowBook(unsigned bookId, unsigned userId)
     	-> std::expected<void, std::variant<TIdNotExistException, TIdNotUniqueException>>;
-    	
 	virtual auto ReturnBook(unsigned bookId, unsigned userId) -> std::expected<void, TIdNotExistException>;
 
 	protected:
@@ -82,7 +81,14 @@ class TLibrary {
 	std::vector<std::shared_ptr<TWorker>> m_vWorkers;
 	std::vector<std::shared_ptr<TUser>> m_vUsers;
 	std::vector<std::shared_ptr<TBook>> m_vBooks;
-	std::vector<std::pair<unsigned, unsigned>> m_vBorrowedBooks;
+	
+	struct SUserBook {
+		explicit SUserBook(unsigned userId, unsigned bookId);
+		bool operator==(const SUserBook& other) const;
+		unsigned UserId = 0;
+		unsigned BookId = 0;
+	};
+	std::vector<SUserBook> m_vBorrowedBooks;
 };
 
 
