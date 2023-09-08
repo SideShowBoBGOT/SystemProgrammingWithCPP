@@ -16,6 +16,8 @@ namespace NNHelperFuncs {
 		}
 		return m;
 	}
+	
+	std::string TitledString(const std::string& str);
 };
 
 #endif //LAB_1_NNHELPERFUNCS_H

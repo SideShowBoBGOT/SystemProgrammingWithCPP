@@ -7,11 +7,3 @@ const std::string& TBook::Title() const {
 void TBook::Title(const std::string& title) {
 	m_sTitle = title;
 }
-
-const std::string& TBook::Author() const {
-	return m_sAuthor;
-}
-
-void TBook::Author(const std::string& author) {
-	m_sAuthor = author;
-}
