@@ -14,6 +14,8 @@
 TCustomCLI::TCustomCLI(const std::string& name)
 	: CLI::App(name) {
 	
+	require_option();
+	
 	m_pLibrary = std::make_shared<TLibrary>();
 	
 	DecorateAddUserWorker("user")->parse_complete_callback([this](){ AddUser(); });

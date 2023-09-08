@@ -50,6 +50,20 @@ class TUser : public TIdMixin {
     unsigned m_uAge = 0;
 
     std::string m_sPassportData;
+	
+	private:
+	friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<TIdMixin>(*this);
+        ar & m_sName;
+        ar & m_sMiddleName;
+        ar & m_sSurname;
+        ar & m_xGender;
+        ar & m_sResidence;
+        ar & m_uAge;
+        ar & m_sPassportData;
+    }
 };
 
 

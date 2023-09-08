@@ -16,6 +16,14 @@ class TBook : public TIdMixin {
 	
 	protected:
 	std::string m_sTitle;
+	
+	private:
+	friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<TIdMixin>(*this);
+        ar & m_sTitle;
+    }
 };
 
 

@@ -6,6 +6,7 @@
 #include <vector>
 #include <format>
 #include <algorithm>
+
 #include "../Error/TVariadicNumberException.h"
 
 class TIdMixin;
@@ -23,18 +24,24 @@ class TLibrary {
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TWorker>>& Workers() const;
-	virtual auto AddWorker(const std::shared_ptr<TWorker>& worker) -> std::expected<std::monostate, TIdNotUniqueException>;
-	virtual auto RemoveWorker(unsigned id) -> std::expected<std::monostate, TIdNotExistException>;
+	virtual auto AddWorker(const std::shared_ptr<TWorker>& worker)
+		-> std::expected<std::monostate, TIdNotUniqueException>;
+	virtual auto RemoveWorker(unsigned id)
+		-> std::expected<std::monostate, TIdNotExistException>;
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TUser>>& Users() const;
-	virtual auto AddUser(const std::shared_ptr<TUser>& user) -> std::expected<std::monostate, TIdNotUniqueException>;
-	virtual auto RemoveUser(unsigned id) -> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
+	virtual auto AddUser(const std::shared_ptr<TUser>& user)
+		-> std::expected<std::monostate, TIdNotUniqueException>;
+	virtual auto RemoveUser(unsigned id)
+		-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
     virtual const std::vector<std::shared_ptr<TBook>>& Books() const;
-    virtual auto AddBook(const std::shared_ptr<TBook>& book) -> std::expected<std::monostate, TIdNotUniqueException>;
-    virtual auto RemoveBook(unsigned id) -> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
+    virtual auto AddBook(const std::shared_ptr<TBook>& book)
+    	-> std::expected<std::monostate, TIdNotUniqueException>;
+    virtual auto RemoveBook(unsigned id)
+    	-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
     virtual std::vector<std::shared_ptr<TBook>> AvailableBooks() const;
