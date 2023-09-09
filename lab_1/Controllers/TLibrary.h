@@ -6,21 +6,28 @@
 #include <vector>
 #include <format>
 #include <algorithm>
+#include <filesystem>
 
-#include "../Error/TVariadicNumberException.h"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+
+#include "../Error/TIdException.h"
 
 class TIdMixin;
 class TUser;
 class TWorker;
 class TBook;
+class TUserBook;
 
 template<typename T>
 concept CIdMixin = std::is_base_of_v<TIdMixin, T>;
 
 class TLibrary {
 	public:
-	TLibrary()=default;
-	virtual ~TLibrary()=default;
+	TLibrary();
+	virtual ~TLibrary();
 	
 	public:
 	virtual const std::vector<std::shared_ptr<TWorker>>& Workers() const;
@@ -50,6 +57,23 @@ class TLibrary {
 	virtual auto ReturnBook(unsigned bookId, unsigned userId) -> std::expected<std::monostate, TIdNotExistException>;
 
 	protected:
+	template<typename T>
+	static void SaveState(const T& vv, const std::string& fileName) {
+		std::ofstream outFile(fileName);
+		boost::archive::text_oarchive outArchive(outFile);
+		outArchive << vv;
+	};
+	
+	template<typename T>
+	static void LoadState(T& vv, const std::string& fileName) {
+		std::ifstream inFile(fileName);
+		if(inFile) {
+			boost::archive::text_iarchive inArchive(inFile);
+			inArchive >> vv;
+		}
+	}
+
+	protected:
 	template<CIdMixin T>
 	static auto FindById(const std::vector<std::shared_ptr<T>>& cont, unsigned id) {
 		return std::find_if(cont.begin(), cont.end(), [id](const auto& u) {
@@ -62,7 +86,7 @@ class TLibrary {
 		-> std::expected<std::monostate, TIdNotExistException> {
 		const auto it = FindById(cont, id);
 		if(it==cont.end()) {
-			return std::unexpected(TIdNotExistException(id));
+			return std::unexpected(TIdNotExistException({id}));
 		}
 		cont.erase(it);
 		return std::monostate();
@@ -78,29 +102,25 @@ class TLibrary {
 		-> std::expected<std::monostate, TIdNotUniqueException> {
 		
 		if(IsContainId(cont, el->Id())) {
-			return std::unexpected(TIdNotUniqueException(el->Id()));
+			return std::unexpected(TIdNotUniqueException({el->Id()}));
 		}
 		cont.emplace_back(el);
 		return std::monostate();
 	}
 	
 	template<typename T>
-	bool IsContain(const std::vector<T>& cont, const T& el) {
+	static bool IsContain(const std::vector<T>& cont, const T& el) {
 		return std::find(cont.begin(), cont.end(), el)!=cont.end();
 	}
+	
+	protected:
+	std::vector<std::shared_ptr<TUserBook>>::iterator FindUserBook(unsigned userId, unsigned bookId);
 	
 	protected:
 	std::vector<std::shared_ptr<TWorker>> m_vWorkers;
 	std::vector<std::shared_ptr<TUser>> m_vUsers;
 	std::vector<std::shared_ptr<TBook>> m_vBooks;
-	
-	struct SUserBook {
-		explicit SUserBook(unsigned userId, unsigned bookId);
-		bool operator==(const SUserBook& other) const;
-		unsigned UserId = 0;
-		unsigned BookId = 0;
-	};
-	std::vector<SUserBook> m_vBorrowedBooks;
+	std::vector<std::shared_ptr<TUserBook>> m_vBorrowedBooks;
 };
 
 

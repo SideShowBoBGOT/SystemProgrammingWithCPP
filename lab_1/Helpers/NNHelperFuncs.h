@@ -4,6 +4,7 @@
 #include <type_traits>
 #include <string>
 #include <map>
+#include <sstream>
 
 #include <magic_enum.hpp>
 
@@ -18,6 +19,22 @@ namespace NNHelperFuncs {
 	}
 	
 	std::string TitledString(const std::string& str);
+	
+	template<typename T>
+	std::string VectorString(const std::vector<T>& vv, const std::string& sep = ", ") {
+		if(vv.empty()) {
+			return "";
+		}
+		
+		std::stringstream ss;
+		
+		for(auto i = 0u; i < vv.size() - 1; ++i) {
+			ss << vv[i] << sep;
+		}
+		ss << vv[vv.size() - 1];
+		
+		return ss.str();
+	}
 };
 
 #endif //LAB_1_NNHELPERFUNCS_H

@@ -19,3 +19,15 @@ auto TWorker::Age(unsigned age) -> std::expected<std::monostate, TAgeTooSmallExc
 	}
 	return TUser::Age(age);
 }
+
+std::ostream& operator<<(std::ostream& out, const TWorker& worker) {
+	return worker.Print(out);
+}
+
+std::ostream& TWorker::Print(std::ostream& out) const {
+	auto& mout = TUser::Print(out);
+	#define AA(xx) mout << "\t"#xx":" << xx() << ", ";
+		AA(PositionId)
+	#undef AA
+	return mout;
+}

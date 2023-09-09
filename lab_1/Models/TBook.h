@@ -14,6 +14,12 @@ class TBook : public TIdMixin {
 	virtual const std::string& Title() const;
 	virtual void Title(const std::string& title);
 	
+	public:
+	friend std::ostream& operator<<(std::ostream& out, const TBook& book);
+    
+    protected:
+	virtual std::ostream& Print(std::ostream& out) const override;
+	
 	protected:
 	std::string m_sTitle;
 	

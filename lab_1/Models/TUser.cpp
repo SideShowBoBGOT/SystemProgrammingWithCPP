@@ -1,5 +1,6 @@
 #include "TUser.h"
 #include "../Error/TAgeTooSmallException.h"
+#include <magic_enum.hpp>
 
 #include <format>
 
@@ -58,4 +59,22 @@ const std::string &TUser::PassportData() const {
 
 void TUser::PassportData(const std::string &passportData) {
 	m_sPassportData = passportData;
+}
+
+std::ostream& operator<<(std::ostream& out, const TUser& user) {
+	return user.Print(out);
+}
+
+std::ostream& TUser::Print(std::ostream& out) const {
+	auto& mout = TIdMixin::Print(out);
+	#define AA(xx) mout << "\t"#xx":" << xx() << ", ";
+		AA(Name);
+		AA(MiddleName);
+		AA(Surname);
+		mout << "\t" << magic_enum::enum_name(Gender());
+		AA(Residence);
+		AA(Age);
+		AA(PassportData)
+	#undef AA
+	return mout;
 }

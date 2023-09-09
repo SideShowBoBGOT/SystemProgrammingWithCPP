@@ -14,15 +14,21 @@ class TIdMixin {
 	virtual unsigned Id() const;
     virtual void Id(unsigned id);
 	
+	public:
+	friend std::ostream& operator<<(std::ostream& out, const TIdMixin& id);
+	
+	protected:
+	virtual std::ostream& Print(std::ostream& out) const;
+	
 	protected:
 	unsigned m_uId = 0;
 	
 	private:
 	friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_uId;
-    }
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version) {
+		ar & m_uId;
+	}
 };
 
 

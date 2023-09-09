@@ -38,6 +38,12 @@ class TUser : public TIdMixin {
     virtual const std::string& PassportData() const;
     virtual void PassportData(const std::string& passportData);
     
+    public:
+	friend std::ostream& operator<<(std::ostream& out, const TUser& user);
+    
+    protected:
+	virtual std::ostream& Print(std::ostream& out) const override;
+    
     protected:
     std::string m_sName;
     std::string m_sMiddleName;
@@ -53,8 +59,8 @@ class TUser : public TIdMixin {
 	
 	private:
 	friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
+	template<class Archive>
+	void serialize(Archive& ar, const unsigned int version) {
         ar & boost::serialization::base_object<TIdMixin>(*this);
         ar & m_sName;
         ar & m_sMiddleName;

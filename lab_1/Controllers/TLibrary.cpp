@@ -1,6 +1,29 @@
+#include <iostream>
+#include <fstream>
+
 #include "TLibrary.h"
 #include "../Models/TWorker.h"
 #include "../Models/TBook.h"
+#include "../Models/TUserBook.h"
+
+static const std::string s_sUsersFile = "users.txt";
+static const std::string s_sWorkersFile = "workers.txt";
+static const std::string s_sBooksFile = "books.txt";
+static const std::string s_sBorrowedBooksFile = "borrowed_books.txt";
+
+TLibrary::TLibrary() {
+	LoadState(m_vUsers, s_sUsersFile);
+	LoadState(m_vWorkers, s_sWorkersFile);
+	LoadState(m_vBooks, s_sBooksFile);
+	LoadState(m_vBorrowedBooks, s_sBorrowedBooksFile);
+}
+
+TLibrary::~TLibrary() {
+	SaveState(m_vUsers, s_sUsersFile);
+	SaveState(m_vWorkers, s_sWorkersFile);
+	SaveState(m_vBooks, s_sBooksFile);
+	SaveState(m_vBorrowedBooks, s_sBorrowedBooksFile);
+}
 
 const std::vector<std::shared_ptr<TWorker>>& TLibrary::Workers() const {
 	return m_vWorkers;
@@ -27,11 +50,11 @@ auto TLibrary::RemoveUser(unsigned id)
 	
 	const auto userIt = std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
 		[id](const auto& el) {
-			return el.UserId==id;
+			return el->UserId()==id;
 		}
 	);
 	if(userIt!=m_vBorrowedBooks.end()) {
-		return std::unexpected(TForeignIdException(userIt->UserId));
+		return std::unexpected(TForeignIdException({(*userIt)->UserId()}));
 	}
 	return RemoveById(m_vUsers, id);;
 }
@@ -49,11 +72,11 @@ auto TLibrary::RemoveBook(unsigned id)
 	
 	const auto userIt = std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
 		[id](const auto& el) {
-			return el.BookId==id;
+			return el->BookId()==id;
 		}
 	);
 	if(userIt!=m_vBorrowedBooks.end()) {
-		return std::unexpected(TForeignIdException(userIt->BookId));
+		return std::unexpected(TForeignIdException({(*userIt)->UserId()}));
 	}
     
     return RemoveById(m_vBooks, id);
@@ -63,7 +86,7 @@ std::vector<std::shared_ptr<TBook>> TLibrary::AvailableBooks() const {
 	auto vv = std::vector<std::shared_ptr<TBook>>();
 	std::copy_if(m_vBooks.begin(), m_vBooks.end(), std::back_inserter(vv), [this](const auto& book) {
 		return std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(), [&book](const auto& p) {
-			return p.BookId == book->Id();
+			return p->BookId() == book->Id();
 		}) == m_vBorrowedBooks.end();
 	});
     return vv;
@@ -73,16 +96,16 @@ auto TLibrary::BorrowBook(unsigned bookId, unsigned userId)
     -> std::expected<std::monostate, std::variant<TIdNotExistException, TIdNotUniqueException>> {
     
 	if(!IsContainId(m_vBooks, bookId)) {
-		return std::unexpected(TIdNotExistException(bookId));
+		return std::unexpected(TIdNotExistException({bookId}));
 	}
 	if(!IsContainId(m_vUsers, userId)) {
-		return std::unexpected(TIdNotExistException(userId));
+		return std::unexpected(TIdNotExistException({userId}));
 	}
-	if(IsContain(m_vBorrowedBooks, SUserBook{userId, bookId})) {
-		return std::unexpected(TIdNotUniqueException(bookId, userId));
+	if(FindUserBook(userId, bookId)!=m_vBorrowedBooks.end()) {
+		return std::unexpected(TIdNotUniqueException({userId, bookId}));
 	}
 	
-	m_vBorrowedBooks.emplace_back(bookId, userId);
+	m_vBorrowedBooks.emplace_back(std::make_shared<TUserBook>(userId, bookId));
 	
 	return std::monostate();
 }
@@ -90,10 +113,10 @@ auto TLibrary::BorrowBook(unsigned bookId, unsigned userId)
 auto TLibrary::ReturnBook(unsigned int bookId, unsigned int userId)
     -> std::expected<std::monostate, TIdNotExistException> {
     
-    const auto it = std::find(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(), SUserBook{userId, bookId});
+    const auto it = FindUserBook(userId, bookId);
     
     if(it==m_vBorrowedBooks.end()) {
-		return std::unexpected(TIdNotExistException(userId, bookId));
+		return std::unexpected(TIdNotExistException({userId, bookId}));
     }
 	
 	m_vBorrowedBooks.erase(it);
@@ -101,9 +124,11 @@ auto TLibrary::ReturnBook(unsigned int bookId, unsigned int userId)
 	return std::monostate();
 }
 
-TLibrary::SUserBook::SUserBook(unsigned userId, unsigned bookId)
-	: UserId{userId}, BookId{bookId} {}
-
-bool TLibrary::SUserBook::operator==(const TLibrary::SUserBook& other) const {
-	return UserId==other.UserId && BookId==other.BookId;
+std::vector<std::shared_ptr<TUserBook>>::iterator TLibrary::FindUserBook(unsigned int userId, unsigned int bookId) {
+	const auto userBook = TUserBook(userId, bookId);
+	return std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
+    	[&userBook](const auto& ub) {
+			return *ub==userBook;
+    	}
+    );
 }

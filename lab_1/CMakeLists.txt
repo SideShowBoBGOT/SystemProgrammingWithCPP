@@ -12,16 +12,18 @@ add_executable(${PROJECT_NAME} main.cpp Models/TWorker.cpp Models/TWorker.h Mode
         Models/TBook.cpp
         Models/TIdMixin.h
         Models/TIdMixin.cpp Error/TAgeTooSmallException.cpp Error/TAgeTooSmallException.h
-        Error/TVariadicNumberException.h
-        Helpers/SStringLiteral.h
-        Helpers/SVariadicElementsString.h
+        Error/TIdException.h
         Helpers/NNHelperFuncs.h
         Helpers/NNHelperFuncs.cpp
         Views/TCustomCLI.h
         Views/TCustomCLI.cpp
+        Models/TUserBook.h
+        Models/TUserBook.cpp
+        Error/TIdException.cpp
+        Helpers/SOverloadVariant.h
 )
 
-find_package(Boost 1.74 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.74 COMPONENTS program_options system filesystem serialization REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 target_link_libraries(${PROJECT_NAME} LINK_PUBLIC ${Boost_LIBRARIES})
 
