@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <iostream>
 
 #include "CLI/CLI.hpp"
 
@@ -21,6 +22,7 @@ class TCustomCLI : public CLI::App {
 	CLI::App* DecorateBorrowReturnBook(const std::string& prefix);
 	CLI::App* DecorateBorrowBook();
 	CLI::App* DecorateReturnBook();
+	CLI::App* DecorateShow(const std::string& suffix);
 	
 	protected:
 	void AddUser();
@@ -33,6 +35,13 @@ class TCustomCLI : public CLI::App {
 	std::pair<unsigned, unsigned> BorrowReturnBook(const std::string& prefix);
 	void BorrowBook();
 	void ReturnBook();
+	
+	template<class T>
+	void ShowVector(const std::vector<std::shared_ptr<T>>& vv) {
+		for(const auto& el : vv) {
+			std::cout << *el << "\n";
+		}
+	}
 	
 	protected:
 	std::shared_ptr<TLibrary> m_pLibrary;

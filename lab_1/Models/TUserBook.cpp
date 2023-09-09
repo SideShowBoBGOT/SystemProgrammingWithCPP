@@ -28,8 +28,8 @@ std::ostream& operator<<(std::ostream& out, const TUserBook& userBook) {
 }
 
 std::ostream& TUserBook::Print(std::ostream& out) const {
-	#define AA(xx) out << "\t"#xx":" << xx() << ", ";
-		AA(UserId);
+	out << "UserId: " << UserId() << ", ";
+	#define AA(xx) out << "\t"#xx": " << xx() << ", ";
 		AA(BookId)
 	#undef AA
 	return out;

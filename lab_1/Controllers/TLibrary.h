@@ -51,7 +51,7 @@ class TLibrary {
     	-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>>;
 
     public:
-    virtual std::vector<std::shared_ptr<TBook>> AvailableBooks() const;
+    virtual const std::vector<std::shared_ptr<TUserBook>>& UserBooks() const;
     virtual auto BorrowBook(unsigned bookId, unsigned userId)
     	-> std::expected<std::monostate, std::variant<TIdNotExistException, TIdNotUniqueException>>;
 	virtual auto ReturnBook(unsigned bookId, unsigned userId) -> std::expected<std::monostate, TIdNotExistException>;
@@ -120,7 +120,7 @@ class TLibrary {
 	std::vector<std::shared_ptr<TWorker>> m_vWorkers;
 	std::vector<std::shared_ptr<TUser>> m_vUsers;
 	std::vector<std::shared_ptr<TBook>> m_vBooks;
-	std::vector<std::shared_ptr<TUserBook>> m_vBorrowedBooks;
+	std::vector<std::shared_ptr<TUserBook>> m_vUserBooks;
 };
 
 

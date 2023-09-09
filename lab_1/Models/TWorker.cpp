@@ -26,7 +26,7 @@ std::ostream& operator<<(std::ostream& out, const TWorker& worker) {
 
 std::ostream& TWorker::Print(std::ostream& out) const {
 	auto& mout = TUser::Print(out);
-	#define AA(xx) mout << "\t"#xx":" << xx() << ", ";
+	#define AA(xx) mout << "\t"#xx": " << xx() << ", ";
 		AA(PositionId)
 	#undef AA
 	return mout;

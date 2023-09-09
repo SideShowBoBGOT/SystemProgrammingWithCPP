@@ -3,13 +3,16 @@
 #include "TCustomCLI.h"
 
 #include "../Helpers/NNHelperFuncs.h"
+#include "../Helpers/SOverloadVariant.h"
+
+#include "../Error/TAgeTooSmallException.h"
+#include "../Controllers/TLibrary.h"
+
+#include "../Models/TUserBook.h"
 #include "../Models/EGender.h"
 #include "../Models/TUser.h"
 #include "../Models/TWorker.h"
-#include "../Error/TAgeTooSmallException.h"
-#include "../Controllers/TLibrary.h"
 #include "../Models/TBook.h"
-#include "../Helpers/SOverloadVariant.h"
 
 TCustomCLI::TCustomCLI(const std::string& name)
 	: CLI::App(name) {
@@ -26,6 +29,10 @@ TCustomCLI::TCustomCLI(const std::string& name)
 	DecorateRemoveBook()->parse_complete_callback([this]() { RemoveBook(); });
 	DecorateBorrowBook()->parse_complete_callback([this]() { BorrowBook(); });
 	DecorateReturnBook()->parse_complete_callback([this]() { ReturnBook(); });
+	DecorateShow("user")->parse_complete_callback([this](){ ShowVector(m_pLibrary->Users()); });
+	DecorateShow("worker")->parse_complete_callback([this](){ ShowVector(m_pLibrary->Workers()); });
+	DecorateShow("book")->parse_complete_callback([this](){ ShowVector(m_pLibrary->Books()); });
+	DecorateShow("user-book")->parse_complete_callback([this](){ ShowVector(m_pLibrary->UserBooks()); });
 }
 
 CLI::App* TCustomCLI::DecorateAddUserWorker(const std::string& suffix) {
@@ -139,6 +146,10 @@ CLI::App* TCustomCLI::DecorateReturnBook() {
 	return DecorateBorrowReturnBook("return");
 }
 
+CLI::App* TCustomCLI::DecorateShow(const std::string& suffix) {
+	return add_subcommand(std::format("show-{}s", suffix), std::format("Shows {}s", suffix));
+}
+
 void TCustomCLI::AddUser() {
 	const auto cmd = this->get_subcommand("add-user");
 	auto user = std::make_shared<TUser>();
@@ -152,8 +163,10 @@ void TCustomCLI::AddUser() {
 	user->PassportData(cmd->get_option("--passport-data")->as<std::string>());
 	auto res = m_pLibrary->AddUser(user);
 	if(!res) {
-		std::cout << res.error().what();
+		std::cout << res.error().what() << "\n";
+		return;
 	}
+	
 }
 
 void TCustomCLI::AddWorker() {
@@ -170,7 +183,8 @@ void TCustomCLI::AddWorker() {
 	worker->PositionId(cmd->get_option("--position-id")->as<unsigned >());
 	auto res = m_pLibrary->AddWorker(worker);
 	if(!res) {
-		std::cout << res.error().what();
+		std::cout << res.error().what() << "\n";
+		return;
 	}
 }
 
@@ -181,7 +195,8 @@ void TCustomCLI::AddBook() {
 	book->Title(cmd->get_option("--title")->as<std::string>());
 	auto res = m_pLibrary->AddBook(book);
 	if(!res) {
-		std::cout << res.error().what();
+		std::cout << res.error().what() << "\n";
+		return;
 	}
 }
 
@@ -197,11 +212,12 @@ void TCustomCLI::RemoveUser() {
 	if(!res) {
 		std::visit(
 			SOverloadVariant {
-				[](TIdNotExistException& ex) { std::cout << ex.what(); },
-				[](TForeignIdException& ex) { std::cout << ex.what(); },
+				[](TIdNotExistException& ex) { std::cout << ex.what() << "\n"; },
+				[](TForeignIdException& ex) { std::cout << ex.what() << "\n"; },
 			},
 			res.error()
 		);
+		return;
 	}
 }
 
@@ -209,7 +225,8 @@ void TCustomCLI::RemoveWorker() {
 	const auto id = RemoveCommon("worker");
 	auto res = m_pLibrary->RemoveWorker(id);
 	if(!res) {
-		std::cout << res.error().what();
+		std::cout << res.error().what() << "\n";
+		return;
 	}
 }
 
@@ -219,11 +236,12 @@ void TCustomCLI::RemoveBook() {
 	if(!res) {
 		std::visit(
 			SOverloadVariant {
-				[](TIdNotExistException& ex) { std::cout << ex.what(); },
-				[](TForeignIdException& ex) { std::cout << ex.what(); },
+				[](TIdNotExistException& ex) { std::cout << ex.what() << "\n"; },
+				[](TForeignIdException& ex) { std::cout << ex.what() << "\n"; },
 			},
 			res.error()
 		);
+		return;
 	}
 }
 
@@ -236,14 +254,24 @@ std::pair<unsigned, unsigned> TCustomCLI::BorrowReturnBook(const std::string& pr
 
 void TCustomCLI::BorrowBook() {
 	const auto [bookId, userId] = BorrowReturnBook("borrow");
-	m_pLibrary->BorrowBook(bookId, userId).value();
+	auto res = m_pLibrary->BorrowBook(bookId, userId);
+	if(!res) {
+		std::visit(
+			SOverloadVariant {
+				[](TIdNotExistException& ex) { std::cout << ex.what() << "\n"; },
+				[](TIdNotUniqueException& ex) { std::cout << ex.what() << "\n"; },
+			},
+			res.error()
+		);
+		return;
+	}
 }
 
 void TCustomCLI::ReturnBook() {
 	const auto [bookId, userId] = BorrowReturnBook("return");
-	m_pLibrary->ReturnBook(bookId, userId).value();
+	auto res = m_pLibrary->ReturnBook(bookId, userId);
+	if(!res) {
+		std::cout << res.error().what() << "\n";
+		return;
+	}
 }
-
-
-
-

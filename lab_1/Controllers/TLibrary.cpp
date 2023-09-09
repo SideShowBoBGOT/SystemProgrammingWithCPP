@@ -15,14 +15,14 @@ TLibrary::TLibrary() {
 	LoadState(m_vUsers, s_sUsersFile);
 	LoadState(m_vWorkers, s_sWorkersFile);
 	LoadState(m_vBooks, s_sBooksFile);
-	LoadState(m_vBorrowedBooks, s_sBorrowedBooksFile);
+	LoadState(m_vUserBooks, s_sBorrowedBooksFile);
 }
 
 TLibrary::~TLibrary() {
 	SaveState(m_vUsers, s_sUsersFile);
 	SaveState(m_vWorkers, s_sWorkersFile);
 	SaveState(m_vBooks, s_sBooksFile);
-	SaveState(m_vBorrowedBooks, s_sBorrowedBooksFile);
+	SaveState(m_vUserBooks, s_sBorrowedBooksFile);
 }
 
 const std::vector<std::shared_ptr<TWorker>>& TLibrary::Workers() const {
@@ -48,12 +48,12 @@ auto TLibrary::AddUser(const std::shared_ptr<TUser>& user) -> std::expected<std:
 auto TLibrary::RemoveUser(unsigned id)
 	-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>> {
 	
-	const auto userIt = std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
-		[id](const auto& el) {
+	const auto userIt = std::find_if(m_vUserBooks.begin(), m_vUserBooks.end(),
+									 [id](const auto& el) {
 			return el->UserId()==id;
 		}
 	);
-	if(userIt!=m_vBorrowedBooks.end()) {
+	if(userIt != m_vUserBooks.end()) {
 		return std::unexpected(TForeignIdException({(*userIt)->UserId()}));
 	}
 	return RemoveById(m_vUsers, id);;
@@ -70,26 +70,20 @@ auto TLibrary::AddBook(const std::shared_ptr<TBook> &book) -> std::expected<std:
 auto TLibrary::RemoveBook(unsigned id)
 	-> std::expected<std::monostate, std::variant<TIdNotExistException, TForeignIdException>> {
 	
-	const auto userIt = std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
-		[id](const auto& el) {
+	const auto userIt = std::find_if(m_vUserBooks.begin(), m_vUserBooks.end(),
+									 [id](const auto& el) {
 			return el->BookId()==id;
 		}
 	);
-	if(userIt!=m_vBorrowedBooks.end()) {
+	if(userIt != m_vUserBooks.end()) {
 		return std::unexpected(TForeignIdException({(*userIt)->UserId()}));
 	}
     
     return RemoveById(m_vBooks, id);
 }
 
-std::vector<std::shared_ptr<TBook>> TLibrary::AvailableBooks() const {
-	auto vv = std::vector<std::shared_ptr<TBook>>();
-	std::copy_if(m_vBooks.begin(), m_vBooks.end(), std::back_inserter(vv), [this](const auto& book) {
-		return std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(), [&book](const auto& p) {
-			return p->BookId() == book->Id();
-		}) == m_vBorrowedBooks.end();
-	});
-    return vv;
+const std::vector<std::shared_ptr<TUserBook>>& TLibrary::UserBooks() const {
+	return m_vUserBooks;
 }
 
 auto TLibrary::BorrowBook(unsigned bookId, unsigned userId)
@@ -101,11 +95,11 @@ auto TLibrary::BorrowBook(unsigned bookId, unsigned userId)
 	if(!IsContainId(m_vUsers, userId)) {
 		return std::unexpected(TIdNotExistException({userId}));
 	}
-	if(FindUserBook(userId, bookId)!=m_vBorrowedBooks.end()) {
+	if(FindUserBook(userId, bookId) != m_vUserBooks.end()) {
 		return std::unexpected(TIdNotUniqueException({userId, bookId}));
 	}
 	
-	m_vBorrowedBooks.emplace_back(std::make_shared<TUserBook>(userId, bookId));
+	m_vUserBooks.emplace_back(std::make_shared<TUserBook>(userId, bookId));
 	
 	return std::monostate();
 }
@@ -115,19 +109,19 @@ auto TLibrary::ReturnBook(unsigned int bookId, unsigned int userId)
     
     const auto it = FindUserBook(userId, bookId);
     
-    if(it==m_vBorrowedBooks.end()) {
+    if(it == m_vUserBooks.end()) {
 		return std::unexpected(TIdNotExistException({userId, bookId}));
     }
 	
-	m_vBorrowedBooks.erase(it);
+	m_vUserBooks.erase(it);
 	
 	return std::monostate();
 }
 
 std::vector<std::shared_ptr<TUserBook>>::iterator TLibrary::FindUserBook(unsigned int userId, unsigned int bookId) {
 	const auto userBook = TUserBook(userId, bookId);
-	return std::find_if(m_vBorrowedBooks.begin(), m_vBorrowedBooks.end(),
-    	[&userBook](const auto& ub) {
+	return std::find_if(m_vUserBooks.begin(), m_vUserBooks.end(),
+						[&userBook](const auto& ub) {
 			return *ub==userBook;
     	}
     );

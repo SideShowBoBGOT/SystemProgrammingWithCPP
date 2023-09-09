@@ -14,7 +14,7 @@ std::ostream& operator<<(std::ostream& out, const TBook& book) {
 
 std::ostream& TBook::Print(std::ostream& out) const {
 	auto& mout = TIdMixin::Print(out);
-	#define AA(xx) mout << "\t"#xx":" << xx() << ", ";
+	#define AA(xx) mout << "\t"#xx": " << xx() << ", ";
 		AA(Title);
 	#undef AA
 	return mout;

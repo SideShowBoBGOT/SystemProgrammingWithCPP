@@ -67,11 +67,11 @@ std::ostream& operator<<(std::ostream& out, const TUser& user) {
 
 std::ostream& TUser::Print(std::ostream& out) const {
 	auto& mout = TIdMixin::Print(out);
-	#define AA(xx) mout << "\t"#xx":" << xx() << ", ";
+	#define AA(xx) mout << "\t"#xx": " << xx() << ", ";
 		AA(Name);
 		AA(MiddleName);
 		AA(Surname);
-		mout << "\t" << magic_enum::enum_name(Gender());
+		mout << "\tGender: " << magic_enum::enum_name(Gender()) << ", ";
 		AA(Residence);
 		AA(Age);
 		AA(PassportData)
