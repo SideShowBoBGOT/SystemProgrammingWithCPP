@@ -1,0 +1,6 @@
+[submodule "lab_1/external/CLI11"]
+	path = lab_1/external/CLI11
+	url = https://github.com/CLIUtils/CLI11.git
+[submodule "lab_1/external/magic_enum"]
+	path = lab_1/external/magic_enum
+	url = https://github.com/Neargye/magic_enum.git
