@@ -1,5 +1,0 @@
-22 serialization::archive 18 0 0 2 1 0 1 2 1 0
-0 1 0
-1 0 0 0 6 Serhii 12 Vitaliyovich 9 Panchenko 0 4 Kyiv 19 8 xxxxxxxx 0 2
-2
-3 1 5 Homer 3 Abe 7 Simpson 0 11 Springfield 40 8 xxxxxxxx 1

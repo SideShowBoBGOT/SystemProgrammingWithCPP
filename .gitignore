@@ -1,4 +1,6 @@
 *.idea
 *.vscode
+*.out
+*.o
 cmake-build-debug
 cmake-build-debug-event-trace
