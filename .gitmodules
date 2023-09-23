@@ -4,3 +4,9 @@
 [submodule "lab_1/external/magic_enum"]
 	path = lab_1/external/magic_enum
 	url = https://github.com/Neargye/magic_enum.git
+[submodule "lab_2/internal_lib/external/magic_enum"]
+	path = lab_2/internal_lib/external/magic_enum
+	url = https://github.com/Neargye/magic_enum.git
+[submodule "lab_2/internal_lib/external/CLI11"]
+	path = lab_2/internal_lib/external/CLI11
+	url = https://github.com/CLIUtils/CLI11.git

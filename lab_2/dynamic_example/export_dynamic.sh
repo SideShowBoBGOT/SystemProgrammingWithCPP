@@ -1,0 +1,2 @@
+LD_LIBRARY_PATH=/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_2/internal_lib
+export LD_LIBRARY_PATH
