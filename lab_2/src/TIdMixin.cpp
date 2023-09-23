@@ -1,4 +1,4 @@
-#include "../include/TIdMixin.h"
+#include <TIdMixin.hpp>
 
 unsigned int TIdMixin::Id() const {
     return m_uId;

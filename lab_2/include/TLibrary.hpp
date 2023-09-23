@@ -13,7 +13,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/shared_ptr.hpp>
 
-#include "TIdException.h"
+#include <TIdException.hpp>
 
 class TIdMixin;
 class TUser;

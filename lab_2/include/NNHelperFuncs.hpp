@@ -1,12 +1,12 @@
 #ifndef LAB_1_NNHELPERFUNCS_H
 #define LAB_1_NNHELPERFUNCS_H
 
+#include <magic_enum.hpp>
+
 #include <type_traits>
 #include <string>
 #include <map>
 #include <sstream>
-
-#include "magic_enum.hpp"
 
 namespace NNHelperFuncs {
 	template<typename EnumType> requires std::is_enum_v<EnumType>

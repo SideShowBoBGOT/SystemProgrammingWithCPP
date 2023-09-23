@@ -1,4 +1,4 @@
-#include "../include/TBook.h"
+#include <TBook.hpp>
 
 const std::string& TBook::Title() const {
 	return m_sTitle;

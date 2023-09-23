@@ -1,5 +1,5 @@
-#include "../include/TWorker.h"
-#include "../include/TAgeTooSmallException.h"
+#include <TWorker.hpp>
+#include <TAgeTooSmallException.hpp>
 
 #include <format>
 

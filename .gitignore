@@ -1,3 +1,5 @@
 *.idea
+*.vscode
+external
 cmake-build-debug
 cmake-build-debug-event-trace

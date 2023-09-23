@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "TIdMixin.h"
+#include <TIdMixin.hpp>
 
 class TBook : public TIdMixin {
 	public:

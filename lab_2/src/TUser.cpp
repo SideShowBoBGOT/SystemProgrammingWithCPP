@@ -1,6 +1,7 @@
-#include "../include/TUser.h"
-#include "../include/TAgeTooSmallException.h"
-#include "magic_enum.hpp"
+#include <TUser.hpp>
+#include <TAgeTooSmallException.hpp>
+
+#include <magic_enum.hpp>
 
 #include <format>
 

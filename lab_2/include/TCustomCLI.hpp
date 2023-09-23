@@ -5,7 +5,7 @@
 #include <memory>
 #include <iostream>
 
-#include "CLI/CLI.hpp"
+#include <CLI/CLI.hpp>
 
 class TLibrary;
 

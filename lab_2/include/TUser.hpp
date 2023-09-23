@@ -6,8 +6,8 @@
 #include <expected>
 #include <variant>
 
-#include "EGender.h"
-#include "TIdMixin.h"
+#include <EGender.hpp>
+#include <TIdMixin.hpp>
 
 class TAgeTooSmallException;
 

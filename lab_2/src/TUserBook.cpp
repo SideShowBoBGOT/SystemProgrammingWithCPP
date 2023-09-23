@@ -1,4 +1,4 @@
-#include "../include/TUserBook.h"
+#include <TUserBook.hpp>
 
 TUserBook::TUserBook(unsigned userId, unsigned bookId)
 	: m_uUserId{userId}, m_uBookId{bookId} {}

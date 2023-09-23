@@ -1,10 +1,10 @@
 #include <iostream>
 #include <fstream>
 
-#include "../include/TLibrary.h"
-#include "../include/TWorker.h"
-#include "../include/TBook.h"
-#include "../include/TUserBook.h"
+#include <TLibrary.hpp>
+#include <TWorker.hpp>
+#include <TBook.hpp>
+#include <TUserBook.hpp>
 
 static const std::string s_sUsersFile = "users.txt";
 static const std::string s_sWorkersFile = "workers.txt";

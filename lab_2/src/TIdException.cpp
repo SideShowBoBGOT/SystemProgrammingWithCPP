@@ -1,7 +1,7 @@
 #include <format>
 
-#include "../include/TIdException.h"
-#include "../include/NNHelperFuncs.h"
+#include <TIdException.hpp>
+#include <NNHelperFuncs.hpp>
 
 #define NUMBER_ERROR(className, message) \
 	className::className(const std::vector<unsigned>& ids) {\

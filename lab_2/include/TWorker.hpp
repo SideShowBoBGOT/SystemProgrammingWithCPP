@@ -1,7 +1,7 @@
 #ifndef LAB_1_TWORKER_H
 #define LAB_1_TWORKER_H
 
-#include "TUser.h"
+#include <TUser.hpp>
 
 class TAgeTooSmallException;
 

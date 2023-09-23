@@ -1,18 +1,18 @@
 #include <format>
 
-#include "../include/TCustomCLI.h"
+#include <TCustomCLI.hpp>
 
-#include "../include/NNHelperFuncs.h"
-#include "../include/SOverloadVariant.h"
+#include <NNHelperFuncs.hpp>
+#include <SOverloadVariant.hpp>
 
-#include "../include/TAgeTooSmallException.h"
-#include "../include/TLibrary.h"
+#include <TAgeTooSmallException.hpp>
+#include <TLibrary.hpp>
 
-#include "../include/TUserBook.h"
-#include "../include/EGender.h"
-#include "../include/TUser.h"
-#include "../include/TWorker.h"
-#include "../include/TBook.h"
+#include <TUserBook.hpp>
+#include <EGender.hpp>
+#include <TUser.hpp>
+#include <TWorker.hpp>
+#include <TBook.hpp>
 
 TCustomCLI::TCustomCLI(const std::string& name)
 	: CLI::App(name) {
