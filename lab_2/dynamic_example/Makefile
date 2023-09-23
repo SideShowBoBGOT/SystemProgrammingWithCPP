@@ -15,7 +15,7 @@ DLLS := -lboost_serialization
 default: main.out
 
 main.out: main.cpp
-	${CXX} ${CXXFLAGS} $^ -o $@ -L=${INTERNAL_LIB_DIR}/ -llab_2_dynamic ${DLLS}
+	${CXX} ${CXXFLAGS} $^ -o $@ -L=${LD_LIBRARY_PATH} -llab_2_dynamic ${DLLS}
 
 clean:
 	rm *.o *.out
