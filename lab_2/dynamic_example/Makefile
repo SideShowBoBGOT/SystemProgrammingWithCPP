@@ -18,4 +18,4 @@ main.out: main.cpp
 	${CXX} ${CXXFLAGS} $^ -o $@ -L=${LD_LIBRARY_PATH} -llab_2_dynamic ${DLLS}
 
 clean:
-	rm *.o *.out
+	rm *.o *.out *.txt

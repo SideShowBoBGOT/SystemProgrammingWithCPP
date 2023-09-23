@@ -18,4 +18,4 @@ main.out: main.cpp
 	${CXX} ${CXXFLAGS} $^ -o $@ -L=${INTERNAL_LIB_DIR}/ -llab_2_static ${DLLS}
 
 clean:
-	rm *.o *.out
+	rm *.o *.out *.txt

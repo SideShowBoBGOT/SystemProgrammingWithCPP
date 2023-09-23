@@ -1,1 +1,3 @@
-22 serialization::archive 18 0 0 0 1
+22 serialization::archive 18 0 0 2 1 0 1 2 1 0
+0 0 0 0 6 Bjarne 4 None 10 Stroustrup 0 6 Aarhus 72 10 DENMARK_MD 2
+1 1 7 Nicolai 2 M. 8 Josuttis 0 6 Berlin 61 14 DEUSTCHLAND_MD
