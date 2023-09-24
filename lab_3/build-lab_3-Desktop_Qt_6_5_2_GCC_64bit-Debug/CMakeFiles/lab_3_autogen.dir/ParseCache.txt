@@ -48,6 +48,7 @@
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qglobalstatic.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qhash.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qhashfunctions.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qiodevice.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qiodevicebase.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qiterable.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qiterator.h
@@ -111,6 +112,7 @@
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtversionchecks.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtypeinfo.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtypes.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qurl.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qutf8stringview.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qvariant.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qvarlengtharray.h
@@ -129,21 +131,29 @@
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qkeysequence.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qpaintdevice.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qpalette.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qpicture.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qpixelformat.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qpixmap.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qpolygon.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qregion.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qrgb.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qrgba64.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtextdocument.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtgui-config.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtguiexports.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtguiglobal.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtransform.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qwindowdefs.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QLabel
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QPushButton
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QScrollArea
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QWidget
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qabstractbutton.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qabstractscrollarea.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qframe.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlabel.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qpushbutton.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qscrollarea.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qsizepolicy.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qtwidgets-config.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qtwidgetsexports.h

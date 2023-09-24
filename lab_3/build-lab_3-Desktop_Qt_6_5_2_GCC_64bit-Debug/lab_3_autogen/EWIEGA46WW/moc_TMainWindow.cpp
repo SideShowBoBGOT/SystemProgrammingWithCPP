@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../lab_3/TMainWindow.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #if __has_include(<QtCore/qtmochelpers.h>)

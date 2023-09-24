@@ -182,7 +182,7 @@ build lab_3_autogen_timestamp_deps: phony CMakeFiles/lab_3_autogen_timestamp_dep
 #############################################
 # Utility command for lab_3_autogen
 
-build lab_3_autogen: phony CMakeFiles/lab_3_autogen lab_3_autogen/timestamp lab_3_autogen/mocs_compilation.cpp lab_3_autogen_timestamp_deps
+build lab_3_autogen: phony CMakeFiles/lab_3_autogen lab_3_autogen/include/ui_form.h lab_3_autogen/timestamp lab_3_autogen/mocs_compilation.cpp lab_3_autogen_timestamp_deps
 
 
 #############################################
@@ -204,7 +204,7 @@ build CMakeFiles/lab_3_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles
 #############################################
 # Phony custom command for CMakeFiles/lab_3_autogen
 
-build CMakeFiles/lab_3_autogen | ${cmake_ninja_workdir}CMakeFiles/lab_3_autogen: phony lab_3_autogen/timestamp || lab_3_autogen_timestamp_deps
+build CMakeFiles/lab_3_autogen lab_3_autogen/include/ui_form.h | ${cmake_ninja_workdir}CMakeFiles/lab_3_autogen ${cmake_ninja_workdir}lab_3_autogen/include/ui_form.h: phony lab_3_autogen/timestamp || lab_3_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.
