@@ -25,11 +25,14 @@ class TMainWindow : public QWidget {
 
 	private:
 	void UpdateQuestionLayout();
+	void SaveGivenAnswers();
+	void LoadGivenAnswers();
 
 	private slots:
 	void OnStartButton();
 	void OnNextButton();
 	void OnBackButton();
+	void OnFinishButton();
 
 	private:
 	QPushButton* m_pStartButton = nullptr;
@@ -38,8 +41,10 @@ class TMainWindow : public QWidget {
 	QLabel* m_pQuestionText = nullptr;
 	QVBoxLayout* m_pAnswersLayout = nullptr;
 	QWidget* m_pAnswersContents = nullptr;
+	QScrollArea* m_pScrollArea = nullptr;
 	QPushButton* m_pNextButton = nullptr;
 	QPushButton* m_pBackButton = nullptr;
+	QPushButton* m_pFinishButton = nullptr;
 	QLabel* m_pTimeLabel = nullptr;
 	QLabel* m_pTimeLeft = nullptr;
 
@@ -50,7 +55,7 @@ class TMainWindow : public QWidget {
 	const TQuestionsTest* m_pTest;
 
 	private:
-	std::vector<std::vector<unsigned>> m_vGivenAnswers;
+	std::vector<std::vector<bool>> m_vGivenAnswers;
 	unsigned m_uCurrentQuestionIndex = 0;
 };
 

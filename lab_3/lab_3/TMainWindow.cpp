@@ -12,6 +12,7 @@ static const QString s_sStartButtonText = "Start";
 
 static const QString s_sNextButtonText = "Next";
 static const QString s_sBackButtonText = "Back";
+static const QString s_sFinishButtonText = "Finish";
 static const QString s_sTimeLabelText = "Time left:";
 
 TMainWindow::TMainWindow(const TQuestionsTest* test, QWidget *parent)
@@ -24,12 +25,20 @@ TMainWindow::TMainWindow(const TQuestionsTest* test, QWidget *parent)
 
 	m_vGivenAnswers.resize(test->Questions.size());
 	for(auto i = 0; i < test->Questions.size(); ++i) {
-		m_vGivenAnswers[i].resize(test->Questions[i].Answers.size());
+		m_vGivenAnswers[i].assign(test->Questions[i].Answers.size(), false);
 	}
 
+	m_pQuestionNumber->hide();
+	m_pQuestionText->hide();
+	m_pAnswersContents->hide();
+	m_pScrollArea->hide();
+	m_pNextButton->hide();
+	m_pBackButton->hide();
+	m_pFinishButton->hide();
+	m_pTimeLabel->hide();
+	m_pTimeLeft->hide();
+
 }
-
-
 
 void TMainWindow::BuildStartButton() {
 	m_pStartButton = new QPushButton(this);
@@ -40,7 +49,7 @@ void TMainWindow::BuildStartButton() {
 
 	QObject::connect(m_pStartButton, &QPushButton::clicked, this, &TMainWindow::OnStartButton);
 
-	m_pStartButton->hide();
+	//m_pStartButton->hide();
 }
 
 void TMainWindow::BuildQuestionLayout() {
@@ -60,13 +69,13 @@ void TMainWindow::BuildQuestionLayout() {
 	// AnswersArea
 	m_pAnswersLayout = new QVBoxLayout(this);
 	m_pAnswersContents = new QWidget(this);
-	auto answersArea = new QScrollArea(this);
 
-	answersArea->setWidgetResizable(true);
-	answersArea->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-	answersArea->setWidget(m_pAnswersContents);
+	m_pScrollArea = new QScrollArea(this);
+	m_pScrollArea->setWidgetResizable(true);
+	m_pScrollArea->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+	m_pScrollArea->setWidget(m_pAnswersContents);
 
-	layout->addWidget(answersArea);
+	layout->addWidget(m_pScrollArea);
 
 	auto bottomLayout = new QHBoxLayout(this);
 
@@ -78,6 +87,10 @@ void TMainWindow::BuildQuestionLayout() {
 	m_pBackButton->setText(s_sBackButtonText);
 	QObject::connect(m_pBackButton, &QPushButton::clicked, this, &TMainWindow::OnBackButton);
 
+	m_pFinishButton = new QPushButton(this);
+	m_pFinishButton->setText(s_sFinishButtonText);
+	QObject::connect(m_pBackButton, &QPushButton::clicked, this, &TMainWindow::OnFinishButton);
+
 	m_pTimeLabel = new QLabel(this);
 	m_pTimeLabel->setText(s_sTimeLabelText);
 
@@ -85,6 +98,8 @@ void TMainWindow::BuildQuestionLayout() {
 
 	bottomLayout->addWidget(m_pNextButton);
 	bottomLayout->addWidget(m_pBackButton);
+	bottomLayout->addWidget(m_pFinishButton);
+
 	bottomLayout->addWidget(m_pTimeLabel);
 	bottomLayout->addWidget(m_pTimeLeft);
 
@@ -105,23 +120,70 @@ void TMainWindow::UpdateQuestionLayout() {
 		auto checkbox = new QCheckBox(QString::fromStdString(answer.Text));
 		m_vAnswers.push_back(checkbox);
 		m_pAnswersLayout->addWidget(checkbox);
+
 	}
 	m_pAnswersContents->setLayout(m_pAnswersLayout);
 }
 
+void TMainWindow::SaveGivenAnswers() {
+	for(auto i = 0; i < m_vAnswers.size(); ++i) {
+		m_vGivenAnswers[m_uCurrentQuestionIndex][i] = m_vAnswers[i]->isChecked();
+	}
+}
+
+void TMainWindow::LoadGivenAnswers() {
+	for(auto i = 0; i < m_vAnswers.size(); ++i) {
+		m_vAnswers[i]->setChecked(m_vGivenAnswers[m_uCurrentQuestionIndex][i]);
+	}
+}
+
 void TMainWindow::OnStartButton() {
 	m_pStartButton->hide();
-	qInfo() << "OnStartButton" << "\n";
+
+	m_pQuestionNumber->show();
+	m_pQuestionText->show();
+	m_pAnswersContents->show();
+	m_pScrollArea->show();
+	m_pNextButton->show();
+	m_pBackButton->show();
+	m_pFinishButton->show();
+	m_pTimeLabel->show();
+	m_pTimeLeft->show();
+
+	m_pFinishButton->setDisabled(true);
 }
 
 void TMainWindow::OnNextButton() {
+	SaveGivenAnswers();
+
 	m_uCurrentQuestionIndex++;
+
 	UpdateQuestionLayout();
+	LoadGivenAnswers();
+
+	m_pBackButton->setDisabled(false);
+	if(m_uCurrentQuestionIndex == m_pTest->Questions.size() - 1) {
+		m_pNextButton->setDisabled(true);
+		m_pFinishButton->setDisabled(false);
+	}
 }
 
 void TMainWindow::OnBackButton() {
+	SaveGivenAnswers();
+
 	m_uCurrentQuestionIndex--;
+
 	UpdateQuestionLayout();
+	LoadGivenAnswers();
+
+	if(m_uCurrentQuestionIndex==0) {
+		m_pBackButton->setDisabled(true);
+	}
+	m_pNextButton->setDisabled(false);
+	m_pFinishButton->setDisabled(true);
+}
+
+void TMainWindow::OnFinishButton() {
 
 }
 
