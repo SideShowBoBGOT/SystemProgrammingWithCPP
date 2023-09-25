@@ -1,8 +1,6 @@
 #include "TMainWindow.h"
 #include "TQuestionsTest.h"
 
-
-
 static constexpr int s_iWidth = 600;
 static constexpr int s_iHeight = 600;
 
@@ -10,6 +8,7 @@ static constexpr int s_iStartButtonWidth = 100;
 static constexpr int s_iStartButtonHeight = 100;
 static const QString s_sStartButtonText = "Start";
 
+static const QString s_sPointsLabelText = "Points";
 static const QString s_sNextButtonText = "Next";
 static const QString s_sBackButtonText = "Back";
 static const QString s_sFinishButtonText = "Finish";
@@ -22,6 +21,9 @@ TMainWindow::TMainWindow(const TQuestionsTest* test, QWidget *parent)
 
 	BuildStartButton();
 	BuildQuestionLayout();
+
+	m_pResultsLabel = new QLabel(this);
+	m_pResultsLabel->hide();
 
 	m_vGivenAnswers.resize(test->Questions.size());
 	for(auto i = 0; i < test->Questions.size(); ++i) {
@@ -89,7 +91,7 @@ void TMainWindow::BuildQuestionLayout() {
 
 	m_pFinishButton = new QPushButton(this);
 	m_pFinishButton->setText(s_sFinishButtonText);
-	QObject::connect(m_pBackButton, &QPushButton::clicked, this, &TMainWindow::OnFinishButton);
+	QObject::connect(m_pFinishButton, &QPushButton::clicked, this, &TMainWindow::OnFinishButton);
 
 	m_pTimeLabel = new QLabel(this);
 	m_pTimeLabel->setText(s_sTimeLabelText);
@@ -109,8 +111,13 @@ void TMainWindow::BuildQuestionLayout() {
 }
 
 void TMainWindow::UpdateQuestionLayout() {
-	m_pQuestionNumber->setText(QString::number(m_uCurrentQuestionIndex));
+	if(m_pTest->Questions.empty()) return;
+
 	const auto& question = m_pTest->Questions[m_uCurrentQuestionIndex];
+
+	m_pQuestionNumber->setText(
+		"Number: " + QString::number(m_uCurrentQuestionIndex) + " Points: " + QString::number(question.Points));
+
 	m_pQuestionText->setText(QString::fromStdString(question.Text));
 
 	qDeleteAll(m_vAnswers);
@@ -137,8 +144,45 @@ void TMainWindow::LoadGivenAnswers() {
 	}
 }
 
+void TMainWindow::FinishTest() {
+	m_pQuestionNumber->hide();
+	m_pQuestionText->hide();
+	m_pAnswersContents->hide();
+	m_pScrollArea->hide();
+	m_pNextButton->hide();
+	m_pBackButton->hide();
+	m_pFinishButton->hide();
+	m_pTimeLabel->hide();
+	m_pTimeLeft->hide();
+
+
+	auto totalPoints = 0u;
+	for(auto i = 0; i < m_vGivenAnswers.size(); ++i) {
+		auto isCorrect = true;
+
+		for(auto j = 0; j < m_vGivenAnswers[i].size(); ++j) {
+			if(m_vGivenAnswers[i][j] != m_pTest->Questions[i].Answers[j].IsCorrect) {
+				isCorrect = false;
+				break;
+			}
+		}
+
+		if(isCorrect) {
+			totalPoints += m_pTest->Questions[i].Points;
+		}
+	}
+
+	m_pResultsLabel->setText("Points: " + QString::number(totalPoints));
+	m_pResultsLabel->show();
+}
+
 void TMainWindow::OnStartButton() {
 	m_pStartButton->hide();
+
+	if(m_pTest->Questions.empty()) {
+		FinishTest();
+		return;
+	}
 
 	m_pQuestionNumber->show();
 	m_pQuestionText->show();
@@ -151,6 +195,7 @@ void TMainWindow::OnStartButton() {
 	m_pTimeLeft->show();
 
 	m_pFinishButton->setDisabled(true);
+	m_pBackButton->setDisabled(true);
 }
 
 void TMainWindow::OnNextButton() {
@@ -184,7 +229,7 @@ void TMainWindow::OnBackButton() {
 }
 
 void TMainWindow::OnFinishButton() {
-
+	FinishTest();
 }
 
 

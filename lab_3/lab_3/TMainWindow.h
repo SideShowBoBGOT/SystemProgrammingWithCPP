@@ -27,6 +27,7 @@ class TMainWindow : public QWidget {
 	void UpdateQuestionLayout();
 	void SaveGivenAnswers();
 	void LoadGivenAnswers();
+	void FinishTest();
 
 	private slots:
 	void OnStartButton();
@@ -47,6 +48,8 @@ class TMainWindow : public QWidget {
 	QPushButton* m_pFinishButton = nullptr;
 	QLabel* m_pTimeLabel = nullptr;
 	QLabel* m_pTimeLeft = nullptr;
+
+	QLabel* m_pResultsLabel = nullptr;
 
 	private:
 	QList<QCheckBox*> m_vAnswers;
