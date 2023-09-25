@@ -134,14 +134,21 @@ lab_3_autogen/timestamp: \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtguiglobal.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtransform.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qwindowdefs.h \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QCheckBox \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QLabel \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QLayout \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QPushButton \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QScrollArea \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QWidget \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qabstractbutton.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qboxlayout.h \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qcheckbox.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qframe.h \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qgridlayout.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlabel.h \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlayout.h \
+	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlayoutitem.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qpushbutton.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qscrollarea.h \
 	/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qsizepolicy.h \

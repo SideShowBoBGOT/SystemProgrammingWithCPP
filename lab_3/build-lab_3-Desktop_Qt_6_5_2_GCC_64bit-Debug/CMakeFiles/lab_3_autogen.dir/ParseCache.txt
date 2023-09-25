@@ -144,14 +144,21 @@
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtguiglobal.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qtransform.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtGui/qwindowdefs.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QCheckBox
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QLabel
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QLayout
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QPushButton
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QScrollArea
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/QWidget
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qabstractbutton.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qabstractscrollarea.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qboxlayout.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qcheckbox.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qframe.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qgridlayout.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlabel.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlayout.h
+ mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qlayoutitem.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qpushbutton.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qscrollarea.h
  mdp:/home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtWidgets/qsizepolicy.h

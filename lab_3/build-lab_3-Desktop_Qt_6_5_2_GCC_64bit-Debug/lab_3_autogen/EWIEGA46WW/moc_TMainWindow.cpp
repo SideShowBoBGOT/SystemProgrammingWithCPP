@@ -41,14 +41,18 @@ struct qt_meta_stringdata_CLASSTMainWindowENDCLASS_t {};
 static constexpr auto qt_meta_stringdata_CLASSTMainWindowENDCLASS = QtMocHelpers::stringData(
     "TMainWindow",
     "OnStartButton",
-    ""
+    "",
+    "OnNextButton",
+    "OnBackButton"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSTMainWindowENDCLASS_t {
-    uint offsetsAndSizes[6];
+    uint offsetsAndSizes[10];
     char stringdata0[12];
     char stringdata1[14];
     char stringdata2[1];
+    char stringdata3[13];
+    char stringdata4[13];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSTMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -56,11 +60,15 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSTMainWindowENDCLASS_t qt_meta_s
     {
         QT_MOC_LITERAL(0, 11),  // "TMainWindow"
         QT_MOC_LITERAL(12, 13),  // "OnStartButton"
-        QT_MOC_LITERAL(26, 0)   // ""
+        QT_MOC_LITERAL(26, 0),  // ""
+        QT_MOC_LITERAL(27, 12),  // "OnNextButton"
+        QT_MOC_LITERAL(40, 12)   // "OnBackButton"
     },
     "TMainWindow",
     "OnStartButton",
-    ""
+    "",
+    "OnNextButton",
+    "OnBackButton"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -72,7 +80,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSTMainWindowENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,9 +88,13 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSTMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   20,    2, 0x08,    1 /* Private */,
+       1,    0,   32,    2, 0x08,    1 /* Private */,
+       3,    0,   33,    2, 0x08,    2 /* Private */,
+       4,    0,   34,    2, 0x08,    3 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -98,6 +110,10 @@ Q_CONSTINIT const QMetaObject TMainWindow::staticMetaObject = { {
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<TMainWindow, std::true_type>,
         // method 'OnStartButton'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'OnNextButton'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'OnBackButton'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -110,6 +126,8 @@ void TMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         (void)_t;
         switch (_id) {
         case 0: _t->OnStartButton(); break;
+        case 1: _t->OnNextButton(); break;
+        case 2: _t->OnBackButton(); break;
         default: ;
         }
     }
@@ -135,13 +153,13 @@ int TMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

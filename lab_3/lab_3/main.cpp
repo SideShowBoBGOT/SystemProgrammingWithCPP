@@ -7,13 +7,15 @@ TQuestionsTest BuildQuestionTest();
 
 int main(int argc, char *argv[]) {
 	QApplication a(argc, argv);
-	auto w = TMainWindow(BuildQuestionTest());
+	const auto test = BuildQuestionTest();
+	auto w = TMainWindow(&test);
 	w.show();
     return a.exec();
 }
 
 TQuestionsTest BuildQuestionTest() {
 	using namespace std::chrono_literals;
+
 	return TQuestionsTest(30s)
 		.AddQuestion(
 			TQuestion("Who created C language?", 1)
@@ -31,6 +33,37 @@ TQuestionsTest BuildQuestionTest() {
 				.AddAnswer({"MIT", false})
 				.AddAnswer({"GPL 2", false})
 				.AddAnswer({"GPL 3", true})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+			.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
+				.AddAnswer({"Apache", false})
 				.AddAnswer({"Apache", false})
 		);
 }
