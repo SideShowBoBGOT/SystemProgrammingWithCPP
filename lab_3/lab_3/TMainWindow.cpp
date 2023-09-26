@@ -1,6 +1,8 @@
 #include "TMainWindow.h"
 #include "TQuestionsTest.h"
 
+
+
 static constexpr int s_iWidth = 600;
 static constexpr int s_iHeight = 600;
 
@@ -125,9 +127,9 @@ void TMainWindow::UpdateQuestionLayout() {
 
 	for(const auto& answer : question.Answers) {
 		auto checkbox = new QCheckBox(QString::fromStdString(answer.Text));
+		QObject::connect(checkbox, &QCheckBox::stateChanged, this, &TMainWindow::SaveGivenAnswers);
 		m_vAnswers.push_back(checkbox);
 		m_pAnswersLayout->addWidget(checkbox);
-
 	}
 	m_pAnswersContents->setLayout(m_pAnswersLayout);
 }
@@ -140,7 +142,9 @@ void TMainWindow::SaveGivenAnswers() {
 
 void TMainWindow::LoadGivenAnswers() {
 	for(auto i = 0; i < m_vAnswers.size(); ++i) {
+		m_vAnswers[i]->blockSignals(true);
 		m_vAnswers[i]->setChecked(m_vGivenAnswers[m_uCurrentQuestionIndex][i]);
+		m_vAnswers[i]->blockSignals(false);
 	}
 }
 
@@ -176,8 +180,34 @@ void TMainWindow::FinishTest() {
 	m_pResultsLabel->show();
 }
 
+void TMainWindow::UpdateClock() {
+	const auto now = std::chrono::system_clock::now();
+	const auto diff = std::chrono::system_clock::to_time_t(now) - m_xStartTime;
+	const auto diffTimePoint = std::chrono::system_clock::from_time_t(diff);
+	const auto tmSeconds = std::chrono::time_point_cast<std::chrono::seconds>(diffTimePoint);
+	const auto seconds = tmSeconds.time_since_epoch();
+
+	const auto left = m_pTest->Seconds.value() - seconds;
+	m_pTimeLeft->setText(QString::number(left.count()));
+}
+
 void TMainWindow::OnStartButton() {
 	m_pStartButton->hide();
+
+	if(m_pTest->Seconds) {
+		const auto now = std::chrono::system_clock::now();
+		m_xStartTime = std::chrono::system_clock::to_time_t(now);
+		std::chrono::milliseconds millisec = std::chrono::duration_cast<std::chrono::milliseconds>(m_pTest->Seconds.value());
+
+		QTimer::singleShot(millisec.count(), this, &TMainWindow::OnFinishButton);
+
+		m_pTimer = new QTimer(this);
+		QObject::connect(m_pTimer, &QTimer::timeout, this, &TMainWindow::UpdateClock);
+		m_pTimer->start(1000);
+
+		UpdateClock();
+	}
+
 
 	if(m_pTest->Questions.empty()) {
 		FinishTest();

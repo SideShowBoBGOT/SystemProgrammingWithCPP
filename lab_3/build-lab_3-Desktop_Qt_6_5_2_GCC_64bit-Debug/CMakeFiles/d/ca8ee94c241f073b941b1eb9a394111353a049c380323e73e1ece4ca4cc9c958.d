@@ -1,4 +1,5 @@
 lab_3_autogen/timestamp: \
+  /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/QTimer \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/q20memory.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/q20type_traits.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qalgorithms.h \
@@ -10,6 +11,7 @@ lab_3_autogen/timestamp: \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qatomic.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qatomic_cxx11.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbasicatomic.h \
+  /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbasictimer.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbindingstorage.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbytearray.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
@@ -92,6 +94,7 @@ lab_3_autogen/timestamp: \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtextstream.h \
+  /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtimer.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtmetamacros.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtnoop.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \

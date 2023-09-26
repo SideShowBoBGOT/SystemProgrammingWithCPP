@@ -7,6 +7,7 @@
 #include <QScrollArea>
 #include <QLayout>
 #include <QCheckBox>
+#include <QTimer>
 
 #include <vector>
 
@@ -28,6 +29,7 @@ class TMainWindow : public QWidget {
 	void SaveGivenAnswers();
 	void LoadGivenAnswers();
 	void FinishTest();
+	void UpdateClock();
 
 	private slots:
 	void OnStartButton();
@@ -55,11 +57,15 @@ class TMainWindow : public QWidget {
 	QList<QCheckBox*> m_vAnswers;
 
 	private:
+	QTimer* m_pTimer = nullptr;
+
+	private:
 	const TQuestionsTest* m_pTest;
 
 	private:
 	std::vector<std::vector<bool>> m_vGivenAnswers;
 	unsigned m_uCurrentQuestionIndex = 0;
+	std::time_t m_xStartTime;
 };
 
 #endif // TMAINWINDOW_H

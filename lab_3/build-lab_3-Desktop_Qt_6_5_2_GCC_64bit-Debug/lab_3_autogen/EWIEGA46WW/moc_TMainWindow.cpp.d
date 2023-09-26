@@ -1,5 +1,6 @@
 /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/lab_3_autogen/EWIEGA46WW/moc_TMainWindow.cpp: /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/lab_3/TMainWindow.h \
   /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/lab_3_autogen/moc_predefs.h \
+  /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/QTimer \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/q20memory.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/q20type_traits.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qalgorithms.h \
@@ -11,6 +12,7 @@
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qatomic.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qatomic_cxx11.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbasicatomic.h \
+  /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbasictimer.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbindingstorage.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbytearray.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qbytearrayalgorithms.h \
@@ -93,6 +95,7 @@
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtdeprecationmarkers.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtenvironmentvariables.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtextstream.h \
+  /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtimer.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtmetamacros.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtnoop.h \
   /home/sideshowbobgot/Qt/6.5.2/gcc_64/include/QtCore/qtpreprocessorsupport.h \
