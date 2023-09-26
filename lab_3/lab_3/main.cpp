@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 TQuestionsTest BuildQuestionTest() {
 	using namespace std::chrono_literals;
 
-	return TQuestionsTest(5s)
+	return TQuestionsTest(10s)
 		.AddQuestion(
 			TQuestion("Who created C language?", 1)
 				.AddAnswer({"Dennis Ritchie", true})

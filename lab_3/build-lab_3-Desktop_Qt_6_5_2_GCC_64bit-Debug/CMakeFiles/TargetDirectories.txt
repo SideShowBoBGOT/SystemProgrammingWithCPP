@@ -1,9 +1,0 @@
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/lab_3.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/list_install_components.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/install.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/install/local.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/install/strip.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/lab_3_autogen_timestamp_deps.dir
-/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_3/build-lab_3-Desktop_Qt_6_5_2_GCC_64bit-Debug/CMakeFiles/lab_3_autogen.dir
