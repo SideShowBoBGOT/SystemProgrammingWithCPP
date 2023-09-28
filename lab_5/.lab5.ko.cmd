@@ -1,1 +1,0 @@
-cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/lab5.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/lab5.ko /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/lab5.o /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/lab5.mod.o;  true

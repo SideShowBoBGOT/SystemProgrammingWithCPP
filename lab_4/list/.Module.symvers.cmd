@@ -1,1 +1,0 @@
-cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/list/Module.symvers :=  scripts/mod/modpost -m -a     -o /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/list/Module.symvers -T /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/list/modules.order -i Module.symvers -e 

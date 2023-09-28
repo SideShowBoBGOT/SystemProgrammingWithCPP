@@ -1,1 +1,0 @@
-cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/modules.order := {   echo /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/Hello.o; :; } > /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/modules.order

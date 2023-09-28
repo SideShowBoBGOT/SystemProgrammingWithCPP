@@ -1,1 +1,0 @@
-cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/Hello.mod := printf '%s\n'   Hello.o | awk '!x[$$0]++ { print("/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/"$$0) }' > /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/Hello.mod

@@ -1,1 +1,0 @@
-cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/lab5.mod := printf '%s\n'   lab5.o | awk '!x[$$0]++ { print("/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/"$$0) }' > /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/lab5.mod
