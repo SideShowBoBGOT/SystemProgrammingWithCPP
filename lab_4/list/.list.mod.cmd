@@ -1,0 +1,1 @@
+cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/list/list.mod := printf '%s\n'   list.o | awk '!x[$$0]++ { print("/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/list/"$$0) }' > /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_4/list/list.mod
