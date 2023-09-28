@@ -1,4 +1,4 @@
-obj-m := cdev_module.o
+obj-m := lab5.o
 
 # normal makefile
 KDIR ?= /lib/modules/`uname -r`/build
