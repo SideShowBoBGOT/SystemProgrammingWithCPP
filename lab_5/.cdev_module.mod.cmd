@@ -1,0 +1,1 @@
+cmd_/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/cdev_module.mod := printf '%s\n'   cdev_module.o | awk '!x[$$0]++ { print("/home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/"$$0) }' > /home/sideshowbobgot/university/SystemProgrammingWithCPP/lab_5/cdev_module.mod
